@@ -6,6 +6,8 @@
   "dependencies": {
     "bootstrap": "4.1.2",
     "font-awesome": "^4.7.0",
+    "jquery": "3.3.1",
+    "popper.js": "1.14.3",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-media": "1.8.0",
@@ -13,10 +15,11 @@
     "reactstrap": "6.3.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "npm-run-all -p sass:watch start-js",
+    "sass:watch": "npm run sass:build && node-sass-chokidar -w src/styles/scss -o src/styles/css",
+    "sass:build": "node-sass-chokidar src/styles/scss -o src/styles/css --source-map true",
+    "start-js": "react-scripts start",
+    "test": "react-scripts test --env=jsdom"
   },
   "eslintConfig": {
     "extends": "react-app"
