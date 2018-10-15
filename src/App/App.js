@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
+import {Route} from 'react-router-dom'
+import {StartContainer} from './Start'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="container bg-secondary">
-          <span className='text-center display-3 my-4'>Lead the Way</span>
-        </div>
+        <Route exact path='/' component={StartContainer}/>
       </div>
     );
   }
