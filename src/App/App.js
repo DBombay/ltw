@@ -3,7 +3,7 @@ import {Route} from 'react-router-dom'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHandsHelping } from '@fortawesome/free-solid-svg-icons'
 import {StartContainer} from './Start'
-import {GameContainer} from './Game'
+import GameContainer from './Game'
 import {GlossaryContainer} from "./Glossary";
 
 library.add(faHandsHelping);
