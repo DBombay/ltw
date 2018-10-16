@@ -13,7 +13,7 @@ class App extends Component {
     return (
       <div className="App">
         <Route exact path='/' component={StartContainer}/>
-        <Route path={'/play'} component={GameContainer}/>
+        <Route path={'/game/family-status'} component={GameContainer}/>
         <Route path={'/glossary'} component={GlossaryContainer}/>
       </div>
     );

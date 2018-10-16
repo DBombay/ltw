@@ -5,8 +5,8 @@ import {FamilyStatusContainer, HowToPlayContainer} from '../../Game'
 export default function GameContainer() {
   return(
     <div>
-      <Route path={`game/family-status`} component={FamilyStatusContainer}/>
-      <Route path={`game/how-to-play`} component={HowToPlayContainer}/>
+      <Route exact path={`/game/family-status`} component={FamilyStatusContainer}/>
+      <Route path={`/game/how-to-play`} component={HowToPlayContainer}/>
     </div>
   )
 }
