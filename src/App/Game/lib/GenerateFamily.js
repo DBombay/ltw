@@ -1,26 +1,28 @@
 import faker from 'faker'
 import {Senior, Adult, Child} from './Person'
 
-export function GenerateFamily() {
-  let family= {
-    primary: {},
-    secondary: {}, //optional
-    children: [], //optional
-    seniors: [] //optional
-  }
+export function generateFamily() {
+  let family = {
+    primary: {}, // always present
+    secondary: {}, //randomly generated
+    children: [], //randomly generated
+    seniors: [] //randomly generated
+  };
 
   let familyName = faker.name.lastName()
   if (Math.floor(Math.random() * 101) >= 85) {
     family.primary = new Adult(
+      "adult",
       faker.name.firstName,
       familyName,
       determineGender,
       determineInsured,
       determinedEmployment,
       determineDisabled
-      )
+    )
   } else {
     family.primary = new Senior(
+      "senior",
       faker.name.firstName,
       familyName,
       determineGender,
@@ -29,6 +31,7 @@ export function GenerateFamily() {
     )
   }
 
+  family.secondary = determinePartnerFor(family.primary)
 }
 
 function determineGender() {
@@ -60,8 +63,29 @@ function determineDisabled() {
 }
 
 function determinePartnerFor(primary) {
-  // After the primary family member is generated, this function will determine if a secondary family member is
+  // After the primary family member is generated, this function will determine if a secondary, partner family member is
   // generated. For simplicity's sake, we pair Adults with Adults and Seniors with Seniors. Gender is not taken into
   // account, however Adults are more likely to have a partner than Seniors.
+  if (primary.ageGroup === "adult" && Math.floor(Math.random() * 101) < 75) {
+    return new Adult(
+      "adult",
+      faker.name.firstName,
+      primary.lastName,
+      determineGender,
+      determineInsured,
+      determinedEmployment,
+      determineDisabled
+    )
+  }
 
+  if (primary.ageGroup === "senior" && Math.floor(Math.random() * 101) < 65) {
+    return new Senior(
+      "senior",
+      faker.name.firstName,
+      primary.lastName,
+      determineGender,
+      determineInsured,
+      determineDisabled
+    )
+  }
 }

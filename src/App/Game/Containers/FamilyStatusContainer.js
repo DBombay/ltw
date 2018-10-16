@@ -1,10 +1,19 @@
 import React from 'react'
 import {Fade, Card} from 'reactstrap'
+import {generateFamily} from "../lib/GenerateFamily";
 
 export default class FamilyStatusContainer extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+
+    this.handleFamilyGeneration = this.handleFamilyGeneration.bind(this);
+    this.state = {
+      family: {}
+    }
+  }
+
+  handleFamilyGeneration() {
+    this.setState({family: generateFamily})
   }
 
   render() {
