@@ -2,6 +2,7 @@ import faker from 'faker'
 import {Senior, Adult, Child} from './Person'
 
 export function generateFamily() {
+  //First, we make an object that represents the scaffolding of the potential family.
   let family = {
     primary: {}, // always present
     secondary: {}, //randomly generated
@@ -9,29 +10,47 @@ export function generateFamily() {
     seniors: [] //randomly generated
   };
 
-  let familyName = faker.name.lastName()
-  if (Math.floor(Math.random() * 101) >= 85) {
+  // We use faker to generate a last name once. We'll assume that all household members are related for the time being.
+  let familyName = faker.name.lastName();
+
+  // Next we determine the primary family member / head-of-household. There's a relatively small chance of having a
+  // senior as the primary, just to keep things interesting. We'll set assign the dynamic attributes for the primary
+  // first, otherwise React.js will assign the function to the family object, not the function's return.
+  let gender = determineGender();
+  let insured = determineInsured();
+  let employed = determinedEmployment();
+  let disabled = determineDisabled();
+
+  if (Math.floor(Math.random() * 101) <= 85) {
     family.primary = new Adult(
       "adult",
-      faker.name.firstName,
+      faker.name.firstName(gender),
       familyName,
-      determineGender,
-      determineInsured,
-      determinedEmployment,
-      determineDisabled
+      gender,
+      insured,
+      employed,
+      disabled
     )
   } else {
     family.primary = new Senior(
       "senior",
-      faker.name.firstName,
+      faker.name.firstName(gender),
       familyName,
-      determineGender,
-      determineInsured,
-      determineDisabled
+      gender,
+      insured,
+      disabled
     )
   }
 
-  family.secondary = determinePartnerFor(family.primary)
+  //Now we determine if the primary gets a partner. See the determinePartnerFor() method for more details.
+  let secondary = determinePartnerFor(family.primary);
+  family.secondary = secondary;
+  //Then we determine if there are children in the household.
+
+  //We now determine if there are additional seniors in the house. This shouldn't occur if the primary is a senior.
+
+  //We return the family object so the player can meet them! (This method should only be fired in the FamilyStatusContainer)
+  return family
 }
 
 function determineGender() {
@@ -66,26 +85,31 @@ function determinePartnerFor(primary) {
   // After the primary family member is generated, this function will determine if a secondary, partner family member is
   // generated. For simplicity's sake, we pair Adults with Adults and Seniors with Seniors. Gender is not taken into
   // account, however Adults are more likely to have a partner than Seniors.
+  let gender = determineGender();
+  let insured = determineInsured();
+  let employed = determinedEmployment();
+  let disabled = determineDisabled();
+
   if (primary.ageGroup === "adult" && Math.floor(Math.random() * 101) < 75) {
     return new Adult(
       "adult",
-      faker.name.firstName,
+      faker.name.firstName(gender),
       primary.lastName,
-      determineGender,
-      determineInsured,
-      determinedEmployment,
-      determineDisabled
+      gender,
+      insured,
+      employed,
+      disabled
     )
   }
 
   if (primary.ageGroup === "senior" && Math.floor(Math.random() * 101) < 65) {
     return new Senior(
       "senior",
-      faker.name.firstName,
+      faker.name.firstName(gender),
       primary.lastName,
-      determineGender,
-      determineInsured,
-      determineDisabled
+      gender,
+      insured,
+      disabled
     )
   }
 }

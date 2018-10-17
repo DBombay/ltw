@@ -1,5 +1,5 @@
 import React from 'react'
-import {Fade, Card} from 'reactstrap'
+import {Fade, Card, Button} from 'reactstrap'
 import {generateFamily} from "../lib/GenerateFamily";
 
 export default class FamilyStatusContainer extends React.Component {
@@ -13,13 +13,16 @@ export default class FamilyStatusContainer extends React.Component {
   }
 
   handleFamilyGeneration() {
-    this.setState({family: generateFamily})
+    let generated = generateFamily()
+    this.setState({family: generated})
+    console.log(generated)
   }
 
   render() {
     return (
       <div className='container'>
         <div className="row align-items-center justify-content-center h-100">
+          <Button onClick={() => {this.handleFamilyGeneration()}}>Test Family Generator</Button>
           <Fade>
             <Card>
               <h1>Meet Your Family</h1>
