@@ -11,34 +11,31 @@ export function generateFamily() {
   };
 
   // We use faker to generate a last name once. We'll assume that all household members are related for the time being.
+  // Faker wants us to assign a gender for lastName, but it'll randomly assign one if no argument is passed.
   let familyName = faker.name.lastName();
 
   // Next we determine the primary family member / head-of-household. There's a relatively small chance of having a
-  // senior as the primary, just to keep things interesting. We'll set assign the dynamic attributes for the primary
-  // first, otherwise React.js will assign the function to the family object, not the function's return.
+  // senior as the primary, just to keep things interesting.
   let gender = determineGender();
-  let insured = determineInsured();
-  let employed = determinedEmployment();
-  let disabled = determineDisabled();
-
+  
   if (Math.floor(Math.random() * 101) <= 85) {
     family.primary = new Adult(
       "adult",
       faker.name.firstName(gender),
       familyName,
-      gender,
-      insured,
-      employed,
-      disabled
+      gender === 0 ? "male" : "female",
+      determineInsured(),
+      determinedEmployment(),
+      determineDisabled()
     )
   } else {
     family.primary = new Senior(
       "senior",
       faker.name.firstName(gender),
       familyName,
-      gender,
-      insured,
-      disabled
+      gender === 0 ? "male" : "female",
+      determineInsured(),
+      determineDisabled()
     )
   }
 
@@ -54,8 +51,8 @@ export function generateFamily() {
 }
 
 function determineGender() {
-  // This method randomizes gender by 50%
-  return Math.floor(Math.random() * 101) > 50 ? "female" : "male"
+  // This method randomizes gender by 50%. We need to assign a 1 or 0 so that Faker can use gender specific names.
+  return Math.floor(Math.random() * 2)
 }
 
 function determineInsured() {
@@ -86,19 +83,16 @@ function determinePartnerFor(primary) {
   // generated. For simplicity's sake, we pair Adults with Adults and Seniors with Seniors. Gender is not taken into
   // account, however Adults are more likely to have a partner than Seniors.
   let gender = determineGender();
-  let insured = determineInsured();
-  let employed = determinedEmployment();
-  let disabled = determineDisabled();
 
   if (primary.ageGroup === "adult" && Math.floor(Math.random() * 101) < 75) {
     return new Adult(
       "adult",
       faker.name.firstName(gender),
       primary.lastName,
-      gender,
-      insured,
-      employed,
-      disabled
+      gender === 0 ? "male" : "female",
+      determineInsured(),
+      determinedEmployment(),
+      determineDisabled()
     )
   }
 
@@ -107,9 +101,9 @@ function determinePartnerFor(primary) {
       "senior",
       faker.name.firstName(gender),
       primary.lastName,
-      gender,
-      insured,
-      disabled
+      gender === 0 ? "male" : "female",
+      determineInsured(),
+      determineDisabled()
     )
   }
 }
