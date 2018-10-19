@@ -7,7 +7,7 @@ import {Senior, Adult, Child} from './Person'
 import Family from './Family'
 
 export function generateFamily() {
-  //First, we make an object that represents the scaffolding of the potential family.
+  //First, we make an empty iteration of a class that represents the scaffolding of the potential family.
   let family = new Family;
 
   // We use faker to generate a last name once. We'll assume that all household members are related for the time being.
@@ -34,7 +34,8 @@ export function generateFamily() {
     family.seniors = generateSeniors(familyName)
   }
 
-  // We return the family object so the player can meet them! (This method should only be fired in the FamilyStatusContainer)
+  // We return the family from this method so the player can meet them!
+  // (This method should only be fired in the FamilyStatusContainer)
   return family
 }
 
