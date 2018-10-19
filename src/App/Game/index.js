@@ -1,5 +1,9 @@
+import FamilyStatusContainer from './Containers/FamilyStatusContainer'
 import GameContainer from './Containers/GameContainer'
+import HowToPlayContainer from '../Game/Containers/HowToPlayContainer'
 
 export {
-  GameContainer
+  FamilyStatusContainer,
+  GameContainer as default,
+  HowToPlayContainer
 }
