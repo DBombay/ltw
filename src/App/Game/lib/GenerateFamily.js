@@ -1,5 +1,6 @@
 // This file deals with all functions randomizing family generation. This includes the generation of individuals and the
-// assignment of their attributes.
+// assignment of their attributes. The most important method here is the generateFamily function, which is the only one
+// exported.
 
 import faker from 'faker'
 import {Senior, Adult, Child} from './Person'
@@ -25,7 +26,7 @@ export function generateFamily() {
     family.primary = generateSenior(familyName)
   }
 
-  // Now we determine if the primary gets a partner. See the determinePartnerFor() method for more details.
+  // Now we determine if the primary gets a partner.
   family.secondary = determinePartnerFor(family.primary);
 
   // Then we determine if there are children in the household. This is done regardless of: the number of parents, the
@@ -112,8 +113,6 @@ function determinePartnerFor(primary) {
   // After the primary family member is generated, this function will determine if a secondary, partner family member is
   // generated. For simplicity's sake, we pair Adults with Adults and Seniors with Seniors. Gender is not taken into
   // account, however Adults are more likely to have a partner than Seniors.
-  let gender = determineGender();
-
   if (primary.ageGroup === "adult" && Math.floor(Math.random() * 101) < 75) {
     return generateAdult(primary.lastName)
   }
