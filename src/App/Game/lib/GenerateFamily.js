@@ -1,3 +1,6 @@
+// This file deals with all functions randomizing family generation. This includes the generation of individuals and the
+// assignment of their attributes.
+
 import faker from 'faker'
 import {Senior, Adult, Child} from './Person'
 
@@ -16,38 +19,65 @@ export function generateFamily() {
 
   // Next we determine the primary family member / head-of-household. There's a relatively small chance of having a
   // senior as the primary, just to keep things interesting.
-  let gender = determineGender();
-  
   if (Math.floor(Math.random() * 101) <= 85) {
-    family.primary = new Adult(
-      "adult",
-      faker.name.firstName(gender),
-      familyName,
-      gender === 0 ? "male" : "female",
-      determineInsured(),
-      determinedEmployment(),
-      determineDisabled()
-    )
+    family.primary = generateAdult(familyName)
   } else {
-    family.primary = new Senior(
-      "senior",
-      faker.name.firstName(gender),
-      familyName,
-      gender === 0 ? "male" : "female",
-      determineInsured(),
-      determineDisabled()
-    )
+    family.primary = generateSenior(familyName)
   }
 
-  //Now we determine if the primary gets a partner. See the determinePartnerFor() method for more details.
-  let secondary = determinePartnerFor(family.primary);
-  family.secondary = secondary;
-  //Then we determine if there are children in the household.
+  // Now we determine if the primary gets a partner. See the determinePartnerFor() method for more details.
+  family.secondary = determinePartnerFor(family.primary);
 
-  //We now determine if there are additional seniors in the house. This shouldn't occur if the primary is a senior.
+  // Then we determine if there are children in the household. This is done regardless of: the number of parents, the
+  // genders of the parents, or the age of the parents.
+  family.children = callTheStork(familyName);
 
-  //We return the family object so the player can meet them! (This method should only be fired in the FamilyStatusContainer)
+  // We now determine if there are additional seniors in the house. This shouldn't occur if the primary is a senior.
+  if (family.primary.ageGroup === "adult") {
+    family.seniors = generateSeniors(familyName)
+  }
+
+  // We return the family object so the player can meet them! (This method should only be fired in the FamilyStatusContainer)
   return family
+}
+
+function generateAdult(lastName) {
+  let gender = determineGender();
+
+  return new Adult(
+    "adult",
+    faker.name.firstName(gender),
+    lastName,
+    gender === 0 ? "male" : "female",
+    determineInsured(),
+    determinedEmployment(),
+    determineDisabled()
+  )
+}
+
+function generateChild(lastName) {
+  let gender = determineGender();
+
+  return new Child(
+    "child",
+    faker.name.firstName(gender),
+    lastName,
+    gender === 0 ? "male" : "female",
+    determineInsured()
+  )
+}
+
+function generateSenior(lastName) {
+  let gender = determineGender();
+
+  return new Senior(
+    "senior",
+    faker.name.firstName(gender),
+    lastName,
+    gender === 0 ? "male" : "female",
+    determineInsured(),
+    determineDisabled()
+  )
 }
 
 function determineGender() {
@@ -85,25 +115,40 @@ function determinePartnerFor(primary) {
   let gender = determineGender();
 
   if (primary.ageGroup === "adult" && Math.floor(Math.random() * 101) < 75) {
-    return new Adult(
-      "adult",
-      faker.name.firstName(gender),
-      primary.lastName,
-      gender === 0 ? "male" : "female",
-      determineInsured(),
-      determinedEmployment(),
-      determineDisabled()
-    )
+    return generateAdult(primary.lastName)
   }
 
   if (primary.ageGroup === "senior" && Math.floor(Math.random() * 101) < 65) {
-    return new Senior(
-      "senior",
-      faker.name.firstName(gender),
-      primary.lastName,
-      gender === 0 ? "male" : "female",
-      determineInsured(),
-      determineDisabled()
-    )
+    return generateSenior(primary.lastName)
   }
 }
+
+function callTheStork(lastName) {
+  // This method will build an array of children for the family. Initially, there is a 60% chance of a family receiving
+  // a child. This function enters a while loop that reduces the chance by 15% every time it successfully generates a child.
+  // This means that a family can have a maximum of 4 children.
+  let children = [];
+  let multiplier = 60;
+
+  while (Math.floor(Math.random() * 101) < multiplier) {
+    multiplier -= 15;
+    children.push(generateChild(lastName))
+  }
+  return children
+}
+
+function generateSeniors(lastName) {
+  // This method will build an array of seniors for the family. Initially, there is a 20% chance of a family receiving
+  // a senior. This function enters a while loop that reduces the chance by 10% every time it successfully generates a
+  // senior. This means that a family can have a maximum of 2 seniors. Remember that additional seniors won't generate
+  // for a family if that family's primary is also a senior.
+  let seniors = [];
+  let multiplier = 20;
+
+  while (Math.floor(Math.random() * 101) < multiplier) {
+    multiplier -= 10;
+    seniors.push(generateSenior(lastName))
+  }
+  return seniors
+}
+

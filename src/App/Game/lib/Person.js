@@ -1,3 +1,5 @@
+// This file *defines* the classes for each Person-type
+
 import React from 'react'
 
 // Person base class contains the basic elements for the engine to add family members
