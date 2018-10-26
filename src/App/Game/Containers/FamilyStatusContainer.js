@@ -21,7 +21,7 @@ export default class FamilyStatusContainer extends React.Component {
       family: generated,
       fadeIn: true
     })
-    console.log(generated)
+    console.log(generated)  //debug feature. Should be removed prior to deployment
   }
 
   // This function creates the blurb that users will read which turns the randomly generated text into a brief summary.
@@ -36,7 +36,7 @@ export default class FamilyStatusContainer extends React.Component {
     let primary = this.state.family.primary;
     let secondary = this.state.family.secondary;
     let children = this.state.family.children.length === 0 ? null : this.state.family.children;
-    let seniors = this.state.family.seniors.length === 0 ? null : this.state.family.seniors;
+    let seniors = this.state.family.seniors;
 
     // We'll set up the placeholder
     let primarySummary;
@@ -72,7 +72,7 @@ export default class FamilyStatusContainer extends React.Component {
       childrenSummary =
         <p>
           {secondary ? `${primary.firstName} and ${secondary.firstName} have ` : `${primary.firstName} has `}
-          {children.length > 1 ? `${children.length} kids living with them, named ` : `one child living with them named ${children[0].firstName}.`}
+          {children.length > 1 ? `${children.length} kids living with them.` : `one child living with them named ${children[0].firstName}.`}
         </p>
     } else {
       childrenSummary =
@@ -81,6 +81,25 @@ export default class FamilyStatusContainer extends React.Component {
         </p>
     }
 
+    // Next (almost done) we discuss if there are any seniors living with the household.
+    if (seniors) {
+      if (seniors.length === 1) {
+        seniorSummary =
+          <p>
+            {primary.firstName}'s
+            {seniors[0].gender === "male" ? ` father, ${seniors[0].firstName}, ` : ` mother, ${seniors[0].firstName}, `}
+            is living with {primary.gender === "male" ? "him" : "her"} as well.
+          </p>
+      } else if (seniors.length === 2) {
+        seniorSummary =
+          <p>
+            {primary.firstName}'s
+            {seniors[0].gender === "male" ? ` uncle, ${seniors[0].firstName}, and` : ` aunt, ${seniors[0].firstName}, and`}
+            {seniors[1].gender === "male" ? ` uncle, ${seniors[1].firstName}, ` : ` aunt, ${seniors[1].firstName}, `}
+            are both living with the {primary.lastName}'s as well.
+          </p>
+      }
+    }
 
     return (
       <CardBody className='justify-content-center'>
@@ -90,6 +109,7 @@ export default class FamilyStatusContainer extends React.Component {
             {primarySummary}
             {secondarySummary}
             {childrenSummary}
+            {seniorSummary}
           </div>
         </div>
       </CardBody>

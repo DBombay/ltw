@@ -15,7 +15,7 @@ class Person {
 }
 
 //The Adult class will typically be the primary member added to a family. This class represents individuals between
-// 18 and 64 years old.
+// 22 and 64 years old.
 export class Adult extends Person {
   constructor(ageGroup, firstName, lastName, gender, insured = false, employment = false, disabled = false, hasChild = false) {
     super(ageGroup, firstName, lastName, gender, insured);
