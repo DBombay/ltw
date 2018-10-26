@@ -25,9 +25,11 @@ export function generateFamily() {
   // Now we determine if the primary gets a partner.
   family.secondary = determinePartnerFor(family.primary);
 
-  // Then we determine if there are children in the household. This is done regardless of: the number of parents, the
-  // genders of the parents, or the age of the parents.
+  // Then we determine if there are children in the household and make sure the parent(s) is/are flagged as such. This
+  // is done regardless of: the number of parents, the genders of the parents, or the age of the parents.
   family.children = callTheStork(familyName);
+  family.primary.hasChild = true;
+  if (family.secondary) {family.secondary.hasChild = true}
 
   // We now determine if there are additional seniors in the house. This shouldn't occur if the primary is a senior.
   if (family.primary.ageGroup === "adult") {
@@ -99,11 +101,11 @@ function determinedEmployment() {
 
 function determineDisabled() {
   // This method randomizes whether or not the individual is disabled. If the expression returns any
-  // number over 81, the individual will be disabled (About 56.7 million people — 19 percent of the population — had
+  // number over 91, the individual will be disabled (About 56.7 million people — 19 percent of the population — had
   // a disability in 2010, according to a broad definition of disability, with more than half of them reporting the
   // disability was severe, according to a comprehensive report on this population released today by the U.S. Census
-  // Bureau.)
-  return Math.floor(Math.random() * 101) < 81
+  // Bureau. We're using the 'severe' disability value here.)
+  return Math.floor(Math.random() * 101) < 91
 }
 
 function determinePartnerFor(primary) {
