@@ -8,7 +8,7 @@ import Family from './Family'
 
 export function generateFamily() {
   //First, we make an empty iteration of a class that represents the scaffolding of the potential family.
-  let family = new Family;
+  let family = new Family();
 
   // We use faker to generate a last name once. We'll assume that all household members are related for the time being.
   // Faker wants us to assign a gender for lastName, but it'll randomly assign one if no argument is passed.
