@@ -1,13 +1,14 @@
 import React from 'react'
 import {Fade, Card, Button, CardTitle, CardBody} from 'reactstrap'
 import {generateFamily} from "../lib/GenerateFamily";
+import Data from "../lib/HumanizePeople"
 
 export default class FamilyStatusContainer extends React.Component {
   constructor(props) {
     super(props);
     this.handleFamilyGeneration = this.handleFamilyGeneration.bind(this);
     this.generateFamilySummary = this.generateFamilySummary.bind(this);
-    this.toggle = this.toggle.bind(this);
+    this.initialFadeIn = this.initialFadeIn.bind(this);
     this.state = {
       family: null,
       fadeIn: false
@@ -16,13 +17,20 @@ export default class FamilyStatusContainer extends React.Component {
 
   // This function fires the generateFamily() method from GenerateFamily.js
   handleFamilyGeneration() {
-    let generated = generateFamily()
+    let generated = generateFamily();
     this.setState({
-      family: generated,
-      fadeIn: true
-    })
+      family: generated
+    });
+    this.initialFadeIn();
     console.log(generated)  //debug feature. Should be removed prior to deployment
   }
+
+  initialFadeIn() {
+    this.setState({
+      fadeIn: true
+    });
+  }
+
 
   // This function creates the blurb that users will read which turns the randomly generated text into a brief summary.
   generateFamilySummary(family) {
@@ -48,7 +56,7 @@ export default class FamilyStatusContainer extends React.Component {
     primarySummary =
       <p>
         {primary.firstName} is head of the {primary.lastName} household.
-        {primary.gender === "male" ? " He" : " She"} is {primary.employment ? `currently working` : "currently seeking a job"}
+        {primary.gender === "male" ? " He" : " She"} is {primary.employment ? `currently working as a ${Data.jobs[Math.floor(Math.random() * Data.jobs.length + 1)]}` : "currently seeking a job"}
         {primary.disabled ? ", has a disability, " : ", has no disabilities, "}
         {primary.insured ? " and has health insurance." : " and doesn't have any health insurance."}
       </p>;
@@ -59,7 +67,7 @@ export default class FamilyStatusContainer extends React.Component {
       secondarySummary =
         <p>
           {secondary.firstName} is {primary.firstName}'s partner.
-          {secondary.gender === "male" ? " He" : " She"} is {secondary.employment ? `currently working` : "currently seeking a job"}
+          {secondary.gender === "male" ? " He" : " She"} is {secondary.employment ? `currently working as a ${Data.jobs[Math.floor(Math.random() * Data.jobs.length + 1)]}` : "currently seeking a job"}
           {secondary.disabled ? ", has a disability, " : ", has no disabilities, "}
           {secondary.insured ? " and has health insurance." : " and doesn't have any health insurance."}
         </p>
@@ -110,6 +118,10 @@ export default class FamilyStatusContainer extends React.Component {
             {secondarySummary}
             {childrenSummary}
             {seniorSummary}
+            <p>
+              The {primary.lastName} household's biggest barrier to accessing benefits currently is
+              that {primary.firstName}{family.barrier}
+            </p>
           </div>
         </div>
       </CardBody>
@@ -117,27 +129,28 @@ export default class FamilyStatusContainer extends React.Component {
 
   }
 
-  toggle() {
-    this.setState({
-      fadeIn: !this.state.fadeIn
-    });
-  }
-
   render() {
     return (
       <div className='container'>
-        <div className="row justify-content-center">
-          <Button onClick={() => {
-            this.handleFamilyGeneration()
-          }}>{this.state.family ? 'Find a different Family!' : 'Find Me a Family!'}</Button>
-        </div>
         <div className="row align-items-center justify-content-center h-100">
-          <Fade in={this.state.fadeIn}>
+          {!this.state.family && <Card className='w-100'>
+            <div className="text-center">Click the button below to get started!</div>
+          </Card>}
+          <Fade in={this.state.fadeIn} className='w-100'>
             <Card>
               {this.generateFamilySummary(this.state.family)}
             </Card>
           </Fade>
         </div>
+        <div className="row justify-content-center">
+          <Button onClick={() => {
+            this.handleFamilyGeneration()
+          }}>{this.state.family ? 'Find a different Family!' : 'Find Me a Family!'}</Button>
+        </div>
+        {this.state.family &&
+        <div className="row justify-content-center">
+          <Button>Lead the Way for the {this.state.family.primary.lastName} Family!</Button>
+        </div>}
       </div>
     )
   }

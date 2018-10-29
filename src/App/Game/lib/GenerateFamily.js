@@ -5,6 +5,7 @@
 import faker from 'faker'
 import {Senior, Adult, Child} from './Person'
 import Family from './Family'
+import Data from './HumanizePeople'
 
 export function generateFamily() {
   //First, we make an empty iteration of a class that represents the scaffolding of the potential family.
@@ -36,6 +37,9 @@ export function generateFamily() {
     family.seniors = generateSeniors(familyName)
   }
 
+  // All family's in this application have a barrier that prevents them from accessing benefits in the first place.
+    let randomBarrier = Math.floor(Math.random() * Object.keys(Data.barriers).length + 1);
+    family.barrier = Data.barriers[randomBarrier]
   // We return the family from this method so the player can meet them!
   // (This method should only be fired in the FamilyStatusContainer)
   return family
