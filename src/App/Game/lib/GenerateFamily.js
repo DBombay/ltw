@@ -39,7 +39,7 @@ export function generateFamily() {
 
   // All family's in this application have a barrier that prevents them from accessing benefits in the first place.
     let randomBarrier = Math.floor(Math.random() * Object.keys(Data.barriers).length + 1);
-    family.barrier = Data.barriers[randomBarrier]
+    family.barrier = Data.barriers[randomBarrier];
   // We return the family from this method so the player can meet them!
   // (This method should only be fired in the FamilyStatusContainer)
   return family
@@ -109,7 +109,7 @@ function determineDisabled() {
   // a disability in 2010, according to a broad definition of disability, with more than half of them reporting the
   // disability was severe, according to a comprehensive report on this population released today by the U.S. Census
   // Bureau. We're using the 'severe' disability value here.)
-  return Math.floor(Math.random() * 101) < 91
+  return Math.floor(Math.random() * 101) > 91
 }
 
 function determinePartnerFor(primary) {

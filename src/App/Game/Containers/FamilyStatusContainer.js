@@ -34,9 +34,9 @@ export default class FamilyStatusContainer extends React.Component {
 
   // This function creates the blurb that users will read which turns the randomly generated text into a brief summary.
   generateFamilySummary(family) {
-    // We first check to see if a family exists. If not, we direct the user to click the 'Meet my family' button.
+    // We first check to see if a family exists. If not, we kill the code block.
     if (family === null) {
-      return <div>Click the button above to get started!</div>
+      return null
     }
 
     // For simplicity's sake, we assign all the family variables to instance variables. This also makes the conditional
@@ -145,7 +145,7 @@ export default class FamilyStatusContainer extends React.Component {
         <div className="row justify-content-center">
           <Button onClick={() => {
             this.handleFamilyGeneration()
-          }}>{this.state.family ? 'Find a different Family!' : 'Find Me a Family!'}</Button>
+          }}>{this.state.family ? 'Find a Different Family!' : 'Find Me a Family!'}</Button>
         </div>
         {this.state.family &&
         <div className="row justify-content-center">
