@@ -32,7 +32,7 @@ class App extends Component {
     return (
       <div className="App" style={{height: this.state.height, width: this.state.width}}>
         <Route exact path='/' component={StartContainer}/>
-        <Route path={'/game/family-status'} component={GameContainer}/>
+        <Route path={'/game'} component={GameContainer}/>
         <Route path={'/glossary'} component={GlossaryContainer}/>
       </div>
     );

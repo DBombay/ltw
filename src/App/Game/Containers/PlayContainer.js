@@ -3,7 +3,7 @@ import {Fade, Card, Button, CardTitle, CardBody, CardText, CardHeader} from 'rea
 import {generateFamily, StatusToolbar, Tutorial} from "../../Game";
 import Data from "../lib/HumanizePeople"
 
-export default class FamilyStatusContainer extends React.Component {
+export default class PlayContainer extends React.Component {
   constructor(props) {
     super(props);
     this.handleFamilyGeneration = this.handleFamilyGeneration.bind(this);
@@ -153,7 +153,7 @@ export default class FamilyStatusContainer extends React.Component {
               this.handleFamilyGeneration()
             }}>{this.state.family ? 'Find a Different Family!' : 'Find Me a Family!'}</Button>
           </div>
-          {!this.state.family ? <StatusToolbar/> : <StatusToolbar family={this.state.family}/>}
+          {this.state.family && <StatusToolbar family={this.state.family}/>}
         </Card>
       </div>
     )

@@ -2,13 +2,13 @@
 // through the course of their play through.
 
 import React from 'react'
-import {CardFooter} from 'reactstrap'
+import {CardFooter, Progress} from 'reactstrap'
 
 export default class StatusToolbar extends React.Component {
   constructor(props) {
     super(props);
     this.family = this.props.family;
-    this.determineBadgeColor = this.determineBadgeColor.bind(this);
+    this.determineColor = this.determineColor.bind(this);
 
     // I'm using ternaries for setting state here because we use this toolbar to
     // explain how to play the game.
@@ -23,31 +23,71 @@ export default class StatusToolbar extends React.Component {
     }
   }
 
-  determineBadgeColor(value) {
+  determineColor(value) {
     switch (true) {
-      case value === 0:
+      case value < 2:
         return 'danger';
-      case value > 0 && value <= 2:
+      case value > 1 && value < 4:
         return 'warning';
-      case value >= 3:
+      case value >= 4:
         return 'success';
       default:
-        return 'primary'
+        return 'info'
     }
   }
 
   render() {
     return (
       <CardFooter fixed='true'>
-        <div className='offset-md-1 col-md-10'>
+        <div className='offset-md-1 col-md-10 col-sm-12'>
           <div className="row justify-content-center">
             <span className="h4 text-center">
               <strong className='text-dark'>Family Status:</strong>
-              <span className={`badge badge-${this.determineBadgeColor(this.state.statValue)} text-white mx-2`}>
+              <span className={`badge badge-${this.determineColor(this.state.statValue)} text-white mx-2`}>
                 {this.state.statText}
               </span>
             </span>
           </div>
+
+          <div className="text-center h5">Food</div>
+          <Progress
+            animated={true}
+            max={5}
+            value={this.state.food}
+            color={this.determineColor(this.state.food)}
+          />
+
+          <div className="text-center h5 mt-2">Housing</div>
+          <Progress
+            animated={true}
+            max={5}
+            value={this.state.housing}
+            color={this.determineColor(this.state.housing)}
+          />
+
+          <div className="text-center h5 mt-2">Health</div>
+          <Progress
+            animated={true}
+            max={5}
+            value={this.state.health}
+            color={this.determineColor(this.state.health)}
+          />
+
+          <div className="text-center h5 mt-2">Income</div>
+          <Progress
+            animated={true}
+            max={5}
+            value={this.state.income}
+            color={this.determineColor(this.state.income)}
+          />
+
+          <div className="text-center h5 mt-2">Well-Being</div>
+          <Progress
+            animated={true}
+            max={5}
+            value={this.state.wellbeing}
+            color={this.determineColor(this.state.wellbeing)}
+          />
         </div>
       </CardFooter>
     )
