@@ -1,6 +1,6 @@
 import React from 'react'
-import {Fade, Card, Button, CardTitle, CardBody} from 'reactstrap'
-import {generateFamily} from "../lib/GenerateFamily";
+import {Fade, Card, Button, CardTitle, CardBody, CardText, CardHeader} from 'reactstrap'
+import {generateFamily, StatusToolbar, Tutorial} from "../../Game";
 import Data from "../lib/HumanizePeople"
 
 export default class FamilyStatusContainer extends React.Component {
@@ -54,103 +54,107 @@ export default class FamilyStatusContainer extends React.Component {
 
     // Here we generate the content for the primary's summary.
     primarySummary =
-      <p>
+      <CardText>
         {primary.firstName} is head of the {primary.lastName} household.
         {primary.gender === "male" ? " He" : " She"} is {primary.employment ? `currently working as a ${Data.jobs[Math.floor(Math.random() * Data.jobs.length + 1)]}` : "currently seeking a job"}
         {primary.disabled ? ", has a disability, " : ", has no disabilities, "}
         {primary.insured ? " and has health insurance." : " and doesn't have any health insurance."}
-      </p>;
+      </CardText>;
 
     // if a secondary family member exists, we generate their content here. Otherwise we tell the user how lonely the
     // primary is...
     if (secondary) {
       secondarySummary =
-        <p>
+        <CardText>
           {secondary.firstName} is {primary.firstName}'s partner.
           {secondary.gender === "male" ? " He" : " She"} is {secondary.employment ? `currently working as a ${Data.jobs[Math.floor(Math.random() * Data.jobs.length + 1)]}` : "currently seeking a job"}
           {secondary.disabled ? ", has a disability, " : ", has no disabilities, "}
           {secondary.insured ? " and has health insurance." : " and doesn't have any health insurance."}
-        </p>
+        </CardText>
     } else {
-      secondarySummary = <p>{primary.firstName} doesn't have a partner to help manage the household expenses.</p>
+      secondarySummary =
+        <CardText>{primary.firstName} doesn't have a partner to help manage the household expenses.</CardText>
     }
 
     // Now we check if there are children in the family.
     if (children) {
       childrenSummary =
-        <p>
+        <CardText>
           {secondary ? `${primary.firstName} and ${secondary.firstName} have ` : `${primary.firstName} has `}
           {children.length > 1 ? `${children.length} kids living with them.` : `one child living with them named ${children[0].firstName}.`}
-        </p>
+        </CardText>
     } else {
       childrenSummary =
-        <p>
+        <CardText>
           The {primary.lastName} household has no children.
-        </p>
+        </CardText>
     }
 
     // Next (almost done) we discuss if there are any seniors living with the household.
     if (seniors) {
       if (seniors.length === 1) {
         seniorSummary =
-          <p>
+          <CardText>
             {primary.firstName}'s
             {seniors[0].gender === "male" ? ` father, ${seniors[0].firstName}, ` : ` mother, ${seniors[0].firstName}, `}
             is living with {primary.gender === "male" ? "him" : "her"} as well.
-          </p>
+          </CardText>
       } else if (seniors.length === 2) {
         seniorSummary =
-          <p>
+          <CardText>
             {primary.firstName}'s
             {seniors[0].gender === "male" ? ` uncle, ${seniors[0].firstName}, and` : ` aunt, ${seniors[0].firstName}, and`}
             {seniors[1].gender === "male" ? ` uncle, ${seniors[1].firstName}, ` : ` aunt, ${seniors[1].firstName}, `}
             are both living with the {primary.lastName}'s as well.
-          </p>
+          </CardText>
       }
     }
 
     return (
-      <CardBody className='justify-content-center'>
-        <CardTitle className="text-center">Meet the {this.state.family.primary.lastName} family!</CardTitle>
-        <div className="text-justify">
+      <div className='justify-content-center'>
+        <CardHeader>
+          <CardTitle className="text-center">Meet the {this.state.family.primary.lastName} family!</CardTitle>
+        </CardHeader>
+        <CardBody className="text-justify offset-md-2 col-md-8">
           <div>
             {primarySummary}
             {secondarySummary}
             {childrenSummary}
             {seniorSummary}
-            <p>
+            <CardText>
               The {primary.lastName} household's biggest barrier to accessing benefits currently is
               that {primary.firstName}{family.barrier}
-            </p>
+            </CardText>
           </div>
-        </div>
-      </CardBody>
+        </CardBody>
+      </div>
     )
 
   }
 
   render() {
     return (
-      <div className='container'>
-        <div className="row align-items-center justify-content-center h-100">
-          {!this.state.family && <Card className='w-100'>
-            <div className="text-center">Click the button below to get started!</div>
-          </Card>}
+      <div className='container h-100'>
+        <Card className='my-2 align-self-center'>
+          {!this.state.family && Tutorial()}
+
           <Fade in={this.state.fadeIn} className='w-100'>
-            <Card>
-              {this.generateFamilySummary(this.state.family)}
-            </Card>
+            {this.generateFamilySummary(this.state.family)}
           </Fade>
-        </div>
-        <div className="row justify-content-center">
-          <Button onClick={() => {
-            this.handleFamilyGeneration()
-          }}>{this.state.family ? 'Find a Different Family!' : 'Find Me a Family!'}</Button>
-        </div>
-        {this.state.family &&
-        <div className="row justify-content-center">
-          <Button>Lead the Way for the {this.state.family.primary.lastName} Family!</Button>
-        </div>}
+
+          {this.state.family &&
+          <div className="row justify-content-center my-1">
+            <Button color='primary' size='lg' outline>Lead the Way for
+              the {this.state.family.primary.lastName} Family!</Button>
+          </div>}
+
+          <div className="row justify-content-center my-1">
+            <Button onClick={() => {
+              this.handleFamilyGeneration()
+            }}>{this.state.family ? 'Find a Different Family!' : 'Find Me a Family!'}</Button>
+          </div>
+          {!this.state.family ? <StatusToolbar/> : <StatusToolbar family={this.state.family}/>}
+        </Card>
       </div>
     )
   }
