@@ -53,7 +53,7 @@ export default class StatusToolbar extends React.Component {
           <Progress
             animated={true}
             max={5}
-            value={this.state.food}
+            value={this.state.food < 6 ? this.state.food : 5 }
             color={this.determineColor(this.state.food)}
           />
 
@@ -61,7 +61,7 @@ export default class StatusToolbar extends React.Component {
           <Progress
             animated={true}
             max={5}
-            value={this.state.housing}
+            value={this.state.housing < 6 ? this.state.housing : 5}
             color={this.determineColor(this.state.housing)}
           />
 
@@ -69,7 +69,7 @@ export default class StatusToolbar extends React.Component {
           <Progress
             animated={true}
             max={5}
-            value={this.state.health}
+            value={this.state.health < 6 ? this.state.health : 5}
             color={this.determineColor(this.state.health)}
           />
 
@@ -77,7 +77,7 @@ export default class StatusToolbar extends React.Component {
           <Progress
             animated={true}
             max={5}
-            value={this.state.income}
+            value={this.state.income < 6 ? this.state.income : 5}
             color={this.determineColor(this.state.income)}
           />
 
@@ -85,7 +85,7 @@ export default class StatusToolbar extends React.Component {
           <Progress
             animated={true}
             max={5}
-            value={this.state.wellbeing}
+            value={this.state.wellbeing < 6 ? this.state.wellbeing : 5}
             color={this.determineColor(this.state.wellbeing)}
           />
         </div>
