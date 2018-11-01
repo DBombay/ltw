@@ -122,7 +122,6 @@ export function generateFamily() {
 
   // All family's in this application have a barrier that prevents them from accessing benefits in the first place.
   let randomBarrier = Math.floor(Math.random() * Object.keys(Data.barriers).length);
-  console.log(randomBarrier)
   family.barrier = Data.barriers[randomBarrier];
 
   // We return the family from this method so the player can meet them!
