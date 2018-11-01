@@ -1,4 +1,5 @@
 // This file defines the family class. Extracting the logic here allows more scalability.
+import Barrier from './Barrier'
 
 export default class Family {
   constructor(
@@ -6,7 +7,7 @@ export default class Family {
     secondary = null,
     children = null,
     seniors = null,
-    barrier = '',
+    barrier = new Barrier,
     familyStatus = {text: 'UNAWARE', averageStatValue: 0},
     foodStat = 0,
     housingStat = 0,
@@ -18,7 +19,7 @@ export default class Family {
     this.secondary = secondary; // Randomly generated in GenerateFamily.js
     this.children = children; // Randomly generated in GenerateFamily.js
     this.seniors = seniors; // Randomly generated in GenerateFamily.js
-    this.barrier = barrier; // String value. Initially empty.
+    this.barrier = barrier; // barrier Object. Initially empty.
     this.familyStatus = familyStatus; // Object with string and integer. Text initially set to 'Unaware'
                                       // (only unset from Unaware when barrier is overcome) and averageStatValue is
                                       // initially 0 (represents avg of the 5 stat groups immediately following).

@@ -111,7 +111,7 @@ export function generateFamily() {
         family.healthStat += 5;
         family.wellbeingStat += 5;
       }
-    })
+    });
 
     // If the family has children in the household, the assumption here is that seniors will help take care of them
     if (family.children) {
@@ -121,8 +121,10 @@ export function generateFamily() {
 
 
   // All family's in this application have a barrier that prevents them from accessing benefits in the first place.
-  let randomBarrier = Math.floor(Math.random() * Object.keys(Data.barriers).length + 1);
+  let randomBarrier = Math.floor(Math.random() * Object.keys(Data.barriers).length);
+  console.log(randomBarrier)
   family.barrier = Data.barriers[randomBarrier];
+
   // We return the family from this method so the player can meet them!
   // (This method should only be fired in the PlayContainer)
   return family

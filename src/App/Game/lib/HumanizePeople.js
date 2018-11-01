@@ -1,6 +1,6 @@
 // This is a collection of job names, barriers, and other story elements to make our randomly generated people feel
 // real.
-import {Barrier} from './Barrier'
+import Barrier from './Barrier'
 
 export default {
   barriers: [
