@@ -30,7 +30,9 @@ export function generateFamily() {
   // is done regardless of: the number of parents, the genders of the parents, or the age of the parents.
   family.children = callTheStork(familyName);
   family.primary.hasChild = true;
-  if (family.secondary) {family.secondary.hasChild = true}
+  if (family.secondary) {
+    family.secondary.hasChild = true
+  }
 
   // We now determine if there are additional seniors in the house. This shouldn't occur if the primary is a senior.
   if (family.primary.ageGroup === "adult") {
@@ -38,19 +40,9 @@ export function generateFamily() {
   }
 
   // All family's in this application have a barrier that prevents them from accessing benefits in the first place.
-<<<<<<< Updated upstream
-    let randomBarrier = Math.floor(Math.random() * Object.keys(Data.barriers).length + 1);
-    family.barrier = Data.barriers[randomBarrier];
-||||||| merged common ancestors
-  let randomBarrier = Math.floor(Math.random() * Object.keys(Data.barriers).length);
-  console.log(randomBarrier)
-  family.barrier = Data.barriers[randomBarrier];
-
-=======
   let randomBarrier = Math.floor(Math.random() * Object.keys(Data.barriers).length);
   family.barrier = Data.barriers[randomBarrier];
 
->>>>>>> Stashed changes
   // We return the family from this method so the player can meet them!
   // (This method should only be fired in the FamilyStatusContainer)
   return family
