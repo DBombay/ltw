@@ -32,7 +32,6 @@ export default class StatusDial extends React.Component {
   }
 
   render() {
-    console.log(`${this.props.for}:${this.props.value}`)
     return(
       <Progress
         type="circle"

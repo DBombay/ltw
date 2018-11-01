@@ -16,7 +16,7 @@ export default class StatusToolbar extends React.Component {
     this.state = {
       statText: "UNAWARE",
       statValue: 0,
-      food:  10,
+      food: 10,
       housing: 30,
       health: 50,
       income: 80,
@@ -26,15 +26,18 @@ export default class StatusToolbar extends React.Component {
 
   componentWillReceiveProps(props) {
     this.family = props.family
-    this.setState({
-      statText: props.family.familyStatus.text,
-      statValue: props.family.familyStatus.averageStatValue,
-      food:  props.family.foodStat,
-      housing: props.family.housingStat,
-      health: props.family.healthStat,
-      income: props.family.incomeStat,
-      wellbeing: props.family.wellbeingStat
-    })
+
+    if (this.family) {
+      this.setState({
+        statText: props.family.familyStatus.text,
+        statValue: props.family.familyStatus.averageStatValue,
+        food: props.family.foodStat,
+        housing: props.family.housingStat,
+        health: props.family.healthStat,
+        income: props.family.incomeStat,
+        wellbeing: props.family.wellbeingStat
+      })
+    }
   }
 
   determineColor(value) {
@@ -54,7 +57,7 @@ export default class StatusToolbar extends React.Component {
   render() {
     return (
       <CardFooter fixed='true'>
-        <div className='offset-md-1 col-md-10 col-sm-12'>
+        <div className='offset-md-1 col-md-10'>
           <div className="row justify-content-center">
             <span className="h4 text-center">
               <strong className='text-dark'>Family Status:</strong>

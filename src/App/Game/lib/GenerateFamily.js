@@ -27,7 +27,7 @@ export function generateFamily() {
 
 //We add stats based on Primary's attributes
   if (family.primary.employment) {
-    family.foodStat += 5;
+    family.foodStat += 10;
     family.housingStat += 10;
     family.incomeStat += 10;
     family.wellbeingStat += 10;
@@ -112,6 +112,11 @@ export function generateFamily() {
         family.wellbeingStat += 5;
       }
     })
+
+    // If the family has children in the household, the assumption here is that seniors will help take care of them
+    if (family.children) {
+      family.wellbeingStat += 5 * family.seniors.length
+    }
   }
 
 

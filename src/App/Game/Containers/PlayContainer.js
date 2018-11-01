@@ -49,7 +49,7 @@ export default class PlayContainer extends React.Component {
     let children = this.state.family.children.length === 0 ? null : this.state.family.children;
     let seniors = this.state.family.seniors;
 
-    // We'll set up the placeholder
+    // We'll set up the placeholders
     let secondarySummary;
     let childrenSummary;
     let seniorSummary;
@@ -96,13 +96,12 @@ export default class PlayContainer extends React.Component {
           </CardText>
       }
     }
-
     return (
       <div className='justify-content-center'>
         <CardHeader>
           <CardTitle className="text-center">Meet the {this.state.family.primary.lastName} family!</CardTitle>
         </CardHeader>
-        <CardBody className="text-justify offset-md-2 col-md-8">
+        <CardBody className="text-justify offset-md-2 col-md-8 col-sm-12">
           <div>
             <PersonSummary person={primary} role="primary"/>
             {secondarySummary}
@@ -110,7 +109,7 @@ export default class PlayContainer extends React.Component {
             {seniorSummary}
             <CardText>
               The {primary.lastName} household's biggest barrier to accessing benefits currently is
-              that {primary.firstName}{family.barrier}
+              that {primary.firstName}{family.barrier.text}
             </CardText>
           </div>
         </CardBody>
@@ -134,7 +133,9 @@ export default class PlayContainer extends React.Component {
           </div>}
 
           <div className="row justify-content-center my-1">
-            <a onClick={() => {this.handleFamilyGeneration()}} className='alert-link btn text-primary align-text-bottom'>Try a Different Family?</a>
+            <a onClick={() => {
+              this.handleFamilyGeneration()
+            }} className='alert-link btn text-primary align-text-bottom'>Try a Different Family?</a>
           </div>
           {this.state.family && <StatusToolbar family={this.state.family}/>}
         </Card>

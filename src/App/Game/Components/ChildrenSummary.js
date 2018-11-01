@@ -45,8 +45,6 @@ export default class ChildrenSummary extends React.Component {
   }
 
   render() {
-    console.log(`state: ${this.state.family}`)
-    console.log(`props: ${this.props.family}`)
     return(
       <CardText>
         {this.determineGuardians(this.state.family)}{this.state.family && this.listChildren(this.state.family.children)}
