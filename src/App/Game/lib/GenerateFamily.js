@@ -92,6 +92,7 @@ export function generateFamily() {
     })
   }
 
+
   // We now determine if there are additional seniors in the house. This shouldn't occur if the primary is a senior.
   if (family.primary.ageGroup === "adult") {
     family.seniors = generateSeniors(familyName)
