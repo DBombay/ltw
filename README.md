@@ -8,6 +8,8 @@ The app uses React.js and Bootstrap. File structure typically separates files by
   - **/Components**: Re-usable blocks of code used predominantly for rendering. Any logic included in these files must
   be specifically for the related component
   - **/lib**: Support files that include classes, non container- or component-specific logic, data.
+  
+  ***HUGE*** shout out to Marisa and Myra for their input and support on this project :)
 
 ### Documentation and Communication
 - *Confluence*: N/A
