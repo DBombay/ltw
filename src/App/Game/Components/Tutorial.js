@@ -64,7 +64,7 @@ export default function Tutorial() {
         toolbar when making a decision!
         <br/>
         <br/>
-        <p className='text-center'>When you're ready, click <span className='badge badge-secondary badge-lg'>'Find Me A Family'</span> to
+        <p className='text-center'>When you're ready, click <span className='badge badge-info badge-lg'>'Meet My Family!'</span> to
           get started!</p>
       </div>
     </CardBody>

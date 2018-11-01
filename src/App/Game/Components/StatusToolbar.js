@@ -2,7 +2,8 @@
 // through the course of their play through.
 
 import React from 'react'
-import {CardFooter, Progress} from 'reactstrap'
+import {CardFooter} from 'reactstrap'
+import StatusDial from './StatusDial'
 
 export default class StatusToolbar extends React.Component {
   constructor(props) {
@@ -10,17 +11,30 @@ export default class StatusToolbar extends React.Component {
     this.family = this.props.family;
     this.determineColor = this.determineColor.bind(this);
 
-    // I'm using ternaries for setting state here because we use this toolbar to
+    // I'm setting state here because we use this toolbar to
     // explain how to play the game.
     this.state = {
-      statText: this.family ? this.family.familyStatus.text : "UNAWARE",
-      statValue: this.family ? this.family.familyStatus.averageStatValue : 0,
-      food: this.family ? this.family.foodStat : 0,
-      housing: this.family ? this.family.housingStat : 0,
-      health: this.family ? this.family.healthStat : 0,
-      income: this.family ? this.family.incomeStat : 0,
-      wellbeing: this.family ? this.family.wellbeingStat : 0
+      statText: "UNAWARE",
+      statValue: 0,
+      food:  10,
+      housing: 30,
+      health: 50,
+      income: 80,
+      wellbeing: 100
     }
+  }
+
+  componentWillReceiveProps(props) {
+    this.family = props.family
+    this.setState({
+      statText: props.family.familyStatus.text,
+      statValue: props.family.familyStatus.averageStatValue,
+      food:  props.family.foodStat,
+      housing: props.family.housingStat,
+      health: props.family.healthStat,
+      income: props.family.incomeStat,
+      wellbeing: props.family.wellbeingStat
+    })
   }
 
   determineColor(value) {
@@ -36,6 +50,7 @@ export default class StatusToolbar extends React.Component {
     }
   }
 
+
   render() {
     return (
       <CardFooter fixed='true'>
@@ -48,46 +63,13 @@ export default class StatusToolbar extends React.Component {
               </span>
             </span>
           </div>
-
-          <div className="text-center h5">Food</div>
-          <Progress
-            animated={true}
-            max={5}
-            value={this.state.food < 6 ? this.state.food : 5 }
-            color={this.determineColor(this.state.food)}
-          />
-
-          <div className="text-center h5 mt-2">Housing</div>
-          <Progress
-            animated={true}
-            max={5}
-            value={this.state.housing < 6 ? this.state.housing : 5}
-            color={this.determineColor(this.state.housing)}
-          />
-
-          <div className="text-center h5 mt-2">Health</div>
-          <Progress
-            animated={true}
-            max={5}
-            value={this.state.health < 6 ? this.state.health : 5}
-            color={this.determineColor(this.state.health)}
-          />
-
-          <div className="text-center h5 mt-2">Income</div>
-          <Progress
-            animated={true}
-            max={5}
-            value={this.state.income < 6 ? this.state.income : 5}
-            color={this.determineColor(this.state.income)}
-          />
-
-          <div className="text-center h5 mt-2">Well-Being</div>
-          <Progress
-            animated={true}
-            max={5}
-            value={this.state.wellbeing < 6 ? this.state.wellbeing : 5}
-            color={this.determineColor(this.state.wellbeing)}
-          />
+          <div className="row justify-content-between">
+            <StatusDial for="Food" value={this.state.food}/>
+            <StatusDial for="Housing" value={this.state.housing}/>
+            <StatusDial for="Health" value={this.state.health}/>
+            <StatusDial for="Income" value={this.state.income}/>
+            <StatusDial for="Well-Being" value={this.state.wellbeing}/>
+          </div>
         </div>
       </CardFooter>
     )

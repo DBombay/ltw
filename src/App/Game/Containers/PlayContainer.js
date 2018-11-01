@@ -1,7 +1,6 @@
 import React from 'react'
-import {Fade, Card, Button, CardTitle, CardBody, CardText, CardHeader} from 'reactstrap'
-import {generateFamily, StatusToolbar, Tutorial, PersonSummary} from "../../Game";
-import Data from "../lib/HumanizePeople"
+import {Fade, Card, Button, CardTitle, CardBody, CardText, CardHeader, NavLink} from 'reactstrap'
+import {generateFamily, StatusToolbar, PersonSummary} from "../../Game";
 
 export default class PlayContainer extends React.Component {
   constructor(props) {
@@ -15,13 +14,17 @@ export default class PlayContainer extends React.Component {
     }
   }
 
+  componentWillMount() {
+    this.handleFamilyGeneration()
+    this.initialFadeIn()
+  }
+
   // This function fires the generateFamily() method from GenerateFamily.js
   handleFamilyGeneration() {
     let generated = generateFamily();
     this.setState({
       family: generated
     });
-    this.initialFadeIn();
     console.log(generated)  //debug feature. Should be removed prior to deployment
   }
 
@@ -120,22 +123,18 @@ export default class PlayContainer extends React.Component {
     return (
       <div className='container h-100'>
         <Card className='my-2 align-self-center'>
-          {!this.state.family && Tutorial()}
-
           <Fade in={this.state.fadeIn} className='w-100'>
             {this.generateFamilySummary(this.state.family)}
           </Fade>
 
           {this.state.family &&
           <div className="row justify-content-center my-1">
-            <Button color='primary' size='lg' outline>Lead the Way for
+            <Button color='primary' size='lg'>Lead the Way for
               the {this.state.family.primary.lastName} Family!</Button>
           </div>}
 
           <div className="row justify-content-center my-1">
-            <a onClick={() => {
-              this.handleFamilyGeneration()
-            }}>{this.state.family ? 'Find a Different Family!' : 'Find Me a Family!'}</a>
+            <a onClick={() => {this.handleFamilyGeneration()}} className='alert-link btn text-primary align-text-bottom'>Try a Different Family?</a>
           </div>
           {this.state.family && <StatusToolbar family={this.state.family}/>}
         </Card>
