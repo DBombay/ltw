@@ -2,11 +2,11 @@
 // real.
 export default {
   barriers: {
-    1: "'s first language isn't English and there's a concern that technical and legal terms of benefits won't be understood properly.",
-    2: " doesn't have a car. The family does all its transportation via public transport.",
-    3: " believes that benefits are handouts for those that 'are too lazy to pick themselves up by their bootstraps.'",
-    4: " hasn't completed the process to become a US citizen. There's a fear that the family will be deported if they apply.",
-    5: " doesn't know how to use a computer."
+    'non-native-speaker': "'s first language isn't English and there's a concern that technical and legal terms of benefits won't be understood properly.",
+    'no-personal-vehicle': " doesn't have a car. The family does all its transportation via public transport.",
+    'welfare-bias': " believes that benefits are handouts for those that 'are too lazy to pick themselves up by their bootstraps.'",
+    'undocumented-immigrant': " hasn't completed the process to become a US citizen. There's a fear that the family will be deported if they apply.",
+    'technical-barrier': " doesn't know how to use a computer."
   },
   jobs: [
     "mechanic",
@@ -23,7 +23,7 @@ export default {
     "club bouncer",
     "bartender",
     "waiter",
-    "hotel desk clear",
+    "hotel desk clerk",
     "call center representative",
     "crossing guard",
     "bus driver",

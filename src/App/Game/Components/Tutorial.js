@@ -5,14 +5,16 @@ export default function Tutorial() {
   return (
     <CardBody className='offset-md-2 col-md-8 col-sm-12'>
       <CardTitle className='text-center h2'>How To Play</CardTitle>
-      <CardText className='text-justify'>
+      <div className='text-justify'>
+        <CardText>
         Welcome to Lead the Way! Here, you'll help an otherwise struggling family
         achieve financial independence by introducing them to benefits and helping
         them apply for the ones that will assist them the most!
-        <br/>
-        <br/>
+        </CardText>
+        <CardText>
         Below, you can see the toolbar that will help you track your family's
         status:
+        </CardText>
         <ul>
           <li className='my-2'>
             <strong>Family Status:</strong> Your family's overall situation. They all start at 'Unaware,'
@@ -64,7 +66,7 @@ export default function Tutorial() {
         <br/>
         <p className='text-center'>When you're ready, click <span className='badge badge-secondary badge-lg'>'Find Me A Family'</span> to
           get started!</p>
-      </CardText>
+      </div>
     </CardBody>
   )
 }

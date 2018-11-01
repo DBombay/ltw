@@ -1,6 +1,6 @@
 import React from 'react'
 import {Fade, Card, Button, CardTitle, CardBody, CardText, CardHeader} from 'reactstrap'
-import {generateFamily, StatusToolbar, Tutorial} from "../../Game";
+import {generateFamily, StatusToolbar, Tutorial, PersonSummary} from "../../Game";
 import Data from "../lib/HumanizePeople"
 
 export default class PlayContainer extends React.Component {
@@ -47,30 +47,14 @@ export default class PlayContainer extends React.Component {
     let seniors = this.state.family.seniors;
 
     // We'll set up the placeholder
-    let primarySummary;
     let secondarySummary;
     let childrenSummary;
     let seniorSummary;
 
-    // Here we generate the content for the primary's summary.
-    primarySummary =
-      <CardText>
-        {primary.firstName} is head of the {primary.lastName} household.
-        {primary.gender === "male" ? " He" : " She"} is {primary.employment ? `currently working as a ${Data.jobs[Math.floor(Math.random() * Data.jobs.length + 1)]}` : "currently seeking a job"}
-        {primary.disabled ? ", has a disability, " : ", has no disabilities, "}
-        {primary.insured ? " and has health insurance." : " and doesn't have any health insurance."}
-      </CardText>;
-
     // if a secondary family member exists, we generate their content here. Otherwise we tell the user how lonely the
     // primary is...
     if (secondary) {
-      secondarySummary =
-        <CardText>
-          {secondary.firstName} is {primary.firstName}'s partner.
-          {secondary.gender === "male" ? " He" : " She"} is {secondary.employment ? `currently working as a ${Data.jobs[Math.floor(Math.random() * Data.jobs.length + 1)]}` : "currently seeking a job"}
-          {secondary.disabled ? ", has a disability, " : ", has no disabilities, "}
-          {secondary.insured ? " and has health insurance." : " and doesn't have any health insurance."}
-        </CardText>
+      secondarySummary = <PersonSummary person={secondary} role="secondary" primaryFirstName={primary.firstName}/>
     } else {
       secondarySummary =
         <CardText>{primary.firstName} doesn't have a partner to help manage the household expenses.</CardText>
@@ -117,7 +101,7 @@ export default class PlayContainer extends React.Component {
         </CardHeader>
         <CardBody className="text-justify offset-md-2 col-md-8">
           <div>
-            {primarySummary}
+            <PersonSummary person={primary} role="primary"/>
             {secondarySummary}
             {childrenSummary}
             {seniorSummary}
@@ -149,9 +133,9 @@ export default class PlayContainer extends React.Component {
           </div>}
 
           <div className="row justify-content-center my-1">
-            <Button onClick={() => {
+            <a onClick={() => {
               this.handleFamilyGeneration()
-            }}>{this.state.family ? 'Find a Different Family!' : 'Find Me a Family!'}</Button>
+            }}>{this.state.family ? 'Find a Different Family!' : 'Find Me a Family!'}</a>
           </div>
           {this.state.family && <StatusToolbar family={this.state.family}/>}
         </Card>
