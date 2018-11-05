@@ -13,13 +13,13 @@ export default class ChildrenSummary extends React.Component {
     this.determineGuardians = this.determineGuardians.bind(this);
     this.listChildren = this.listChildren.bind(this);
     this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this)
-    this.state={
+    this.state = {
       family: null
     }
   }
 
   componentWillReceiveProps(props) {
-    this.setState({ family: props.family });
+    this.setState({family: props.family});
   }
 
   determineGuardians(family) {
@@ -38,14 +38,26 @@ export default class ChildrenSummary extends React.Component {
   listChildren(children) {
     switch (true) {
       case children.length === 0:
-        return null
+        return null;
       case children.length === 1:
-        return <span>a {children[0].gender === 'male'? "son" : "daughter"} living with them named {children[0].firstName}.</span>
+        return <span>a {children[0].gender === 'male' ? "son" : "daughter"} living with them named {children[0].firstName}.</span>;
+      case children.length === 2:
+        return <span>two kids: a {children[0].gender === 'male' ? 'son' : 'daughter'}, {children[0].firstName}, and a {children[1].gender === 'male' ? 'son' : 'daughter'}, {children[1].firstName}.</span>;
+      case children.length > 2:
+        let introString = `${children.length} kids named `
+        children.forEach(function (child) {
+          if (child !== children[children.length - 1]) {
+            introString += `${child.firstName}, `
+          } else {
+            introString += `and ${child.firstName}.`
+          }
+        });
+        return <span>{introString}</span>
     }
   }
 
   render() {
-    return(
+    return (
       <CardText>
         {this.determineGuardians(this.state.family)}{this.state.family && this.listChildren(this.state.family.children)}
       </CardText>
