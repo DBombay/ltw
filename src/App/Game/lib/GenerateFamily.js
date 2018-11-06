@@ -233,7 +233,7 @@ function callTheStork(lastName) {
 
   // Here, we determine if the last child is an infant or not. Infants reduce family income. This reduction occurs in the
   // same place that we assign the 'hasChild', right under 'family.children = callTheStork(familyName);'
-  if (children.length > 0 && Math.floor(Math.random() * 101) < 65) {
+  if (children.length > 0 && (Math.floor(Math.random() * 101) < 35)) {
     children[children.length-1].infant = true
   }
   return children

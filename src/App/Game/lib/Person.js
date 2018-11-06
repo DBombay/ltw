@@ -26,7 +26,7 @@ export class Adult extends Person {
 export class Child extends Person {
 // The Child class generates after a family has at least 1 Adult present. This class represents individuals under 18 years old.
 // Fires child-specific events.
-  constructor(ageGroup, firstName, lastName, gender, insured = false, infant = true) {
+  constructor(ageGroup, firstName, lastName, gender, insured = false, infant = false) {
     super(ageGroup, firstName, lastName, gender, insured)
     this.infant = infant; // boolean value.
   }

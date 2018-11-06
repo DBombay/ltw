@@ -38,6 +38,8 @@ export default class ChildrenSummary extends React.Component {
 
   listChildren(children) {
     switch (true) {
+      case !children:
+        return null;
       case children.length === 0:
         return null;
       case children.length === 1:
@@ -58,8 +60,10 @@ export default class ChildrenSummary extends React.Component {
   }
 
   declareInfant(lastChild) {
-    if (lastChild.infant) {
+    if (lastChild && lastChild.infant) {
       return ` ${lastChild.firstName} is the newest edition to the ${lastChild.lastName} family, and ${lastChild.gender === 'male' ? 'he' : 'she'} is still an infant.`
+    } else {
+      return null
     }
   }
 
@@ -71,7 +75,7 @@ export default class ChildrenSummary extends React.Component {
     return (
       <CardText>
         {this.determineGuardians(family)}
-        {family && this.listChildren(children)} {family && this.declareInfant(lastChild)}
+        {this.listChildren(children)} {this.declareInfant(lastChild)}
       </CardText>
     )
   }
