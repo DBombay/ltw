@@ -100,7 +100,7 @@ export function generateFamily() {
 
   // TODO: Right now, I make an assumption here about SSI for Seniors. Need to determine if they should have SSI link to employment
   // Much like children, having seniors living in the household generates some stress on the family. For the sake of
-  // the game, we assume that Seniors have SSI income and are capable of performing self-care tasks (so no well-being
+  // the game, we assume that Seniors have SSI and are capable of performing self-care tasks (so no well-being
   // hit). Since they're sharing living space and share household meals, both those values take a hit.
 
   if (family.seniors) {
