@@ -1,6 +1,7 @@
 import React from 'react'
 import {Fade, Card, Button, CardTitle, CardBody, CardText, CardHeader, NavLink} from 'reactstrap'
 import {generateFamily, StatusToolbar, PersonSummary} from "../../Game";
+import ChildrenSummary from "../Components/ChildrenSummary";
 
 export default class PlayContainer extends React.Component {
   constructor(props) {
@@ -46,12 +47,10 @@ export default class PlayContainer extends React.Component {
     // checks for children and seniors a bit easier to write.
     let primary = this.state.family.primary;
     let secondary = this.state.family.secondary;
-    let children = this.state.family.children.length === 0 ? null : this.state.family.children;
     let seniors = this.state.family.seniors;
 
     // We'll set up the placeholders
     let secondarySummary;
-    let childrenSummary;
     let seniorSummary;
 
     // if a secondary family member exists, we generate their content here. Otherwise we tell the user how lonely the
@@ -61,20 +60,6 @@ export default class PlayContainer extends React.Component {
     } else {
       secondarySummary =
         <CardText>{primary.firstName} doesn't have a partner to help manage the household expenses.</CardText>
-    }
-
-    // Now we check if there are children in the family.
-    if (children) {
-      childrenSummary =
-        <CardText>
-          {secondary ? `${primary.firstName} and ${secondary.firstName} have ` : `${primary.firstName} has `}
-          {children.length > 1 ? `${children.length} kids living with them.` : `one child living with them named ${children[0].firstName}.`}
-        </CardText>
-    } else {
-      childrenSummary =
-        <CardText>
-          The {primary.lastName} household has no children.
-        </CardText>
     }
 
     // Next (almost done) we discuss if there are any seniors living with the household.
@@ -105,11 +90,10 @@ export default class PlayContainer extends React.Component {
           <div>
             <PersonSummary person={primary} role="primary"/>
             {secondarySummary}
-            {childrenSummary}
+            <ChildrenSummary family={family}/>
             {seniorSummary}
             <CardText>
-              The {primary.lastName} household's biggest barrier to accessing benefits currently is
-              that {primary.firstName}{family.barrier.text}
+              The {primary.lastName} household's biggest barrier is {family.barrier.text}
             </CardText>
           </div>
         </CardBody>

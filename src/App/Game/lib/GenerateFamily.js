@@ -26,7 +26,7 @@ export function generateFamily() {
 
 
 //We add stats based on Primary's attributes
-  if (family.primary.employment) {
+  if (family.primary.employed) {
     family.foodStat += 10;
     family.housingStat += 10;
     family.incomeStat += 10;
@@ -48,7 +48,7 @@ export function generateFamily() {
   // If there is a secondary, we update the family's stats based on their attributes. Note that these have less
   // impact, since the assumption is that the primary is also generating the most income.
   if (family.secondary) {
-    if (family.secondary.employment) {
+    if (family.secondary.employed) {
       family.foodStat += 5;
       family.housingStat += 5;
       family.incomeStat += 5;
@@ -68,8 +68,11 @@ export function generateFamily() {
   // Then we determine if there are children in the household and make sure the parent(s) is/are flagged as such. This
   // is done regardless of: the number of parents, the genders of the parents, or the age of the parents.
   family.children = callTheStork(familyName);
-  family.primary.hasChild = true;
-  if (family.secondary) {
+
+  if (family.children.length > 0) {
+    family.primary.hasChild = true;
+  }
+  if (family.secondary && family.children.length > 0) {
     family.secondary.hasChild = true
   }
 
@@ -89,6 +92,12 @@ export function generateFamily() {
         family.healthStat += 5;
         family.wellbeingStat += 5;
       }
+
+      // Infants incur an income penalty. These are in addition to the Child penalties. Much like the Highlander though,
+      // 'THERE CAN BE ONLY ONE.'
+      if (child.infant) {
+        family.incomeStat <= 5 ? family.incomeStat = 0 : family.incomeStat -= 5
+      }
     })
   }
 
@@ -100,7 +109,7 @@ export function generateFamily() {
 
   // TODO: Right now, I make an assumption here about SSI for Seniors. Need to determine if they should have SSI link to employment
   // Much like children, having seniors living in the household generates some stress on the family. For the sake of
-  // the game, we assume that Seniors have SSI income and are capable of performing self-care tasks (so no well-being
+  // the game, we assume that Seniors have SSI and are capable of performing self-care tasks (so no well-being
   // hit). Since they're sharing living space and share household meals, both those values take a hit.
 
   if (family.seniors) {
@@ -220,6 +229,12 @@ function callTheStork(lastName) {
   while (Math.floor(Math.random() * 101) < multiplier) {
     multiplier -= 15;
     children.push(generateChild(lastName))
+  }
+
+  // Here, we determine if the last child is an infant or not. Infants reduce family income. This reduction occurs in the
+  // same place that we assign the 'hasChild', right under 'family.children = callTheStork(familyName);'
+  if (children.length > 0 && Math.floor(Math.random() * 101) < 65) {
+    children[children.length-1].infant = true
   }
   return children
 }
