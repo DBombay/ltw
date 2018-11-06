@@ -93,8 +93,7 @@ export default class PlayContainer extends React.Component {
             <ChildrenSummary family={family}/>
             {seniorSummary}
             <CardText>
-              The {primary.lastName} household's biggest barrier to accessing benefits currently is
-              that {primary.firstName}{family.barrier.text}
+              The {primary.lastName} household's biggest barrier is {family.barrier.text}
             </CardText>
           </div>
         </CardBody>

@@ -12,6 +12,7 @@ export default class ChildrenSummary extends React.Component {
     super(props);
     this.determineGuardians = this.determineGuardians.bind(this);
     this.listChildren = this.listChildren.bind(this);
+    this.declareInfant = this.declareInfant.bind(this);
     this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this)
     this.state = {
       family: null
@@ -56,10 +57,21 @@ export default class ChildrenSummary extends React.Component {
     }
   }
 
+  declareInfant(lastChild) {
+    if (lastChild.infant) {
+      return ` ${lastChild.firstName} is the newest edition to the ${lastChild.lastName} family, and ${lastChild.gender === 'male' ? 'he' : 'she'} is still an infant.`
+    }
+  }
+
   render() {
+    let family = this.state.family;
+    let children = family ? family.children : null;
+    let lastChild = children ? children[children.length - 1] : null;
+
     return (
       <CardText>
-        {this.determineGuardians(this.state.family)}{this.state.family && this.listChildren(this.state.family.children)}
+        {this.determineGuardians(family)}
+        {family && this.listChildren(children)} {family && this.declareInfant(lastChild)}
       </CardText>
     )
   }

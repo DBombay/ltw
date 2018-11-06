@@ -15,9 +15,9 @@ class Person {
 export class Adult extends Person {
 //The Adult class will typically be the primary member added to a family. This class represents individuals between
 // 22 and 64 years old.
-  constructor(ageGroup, firstName, lastName, gender, insured = false, employment = false, disabled = false, hasChild = false) {
+  constructor(ageGroup, firstName, lastName, gender, insured = false, employed = false, disabled = false, hasChild = false) {
     super(ageGroup, firstName, lastName, gender, insured);
-    this.employment = employment; //boolean value, affects and affected by events
+    this.employed = employed; //boolean value, affects and affected by events
     this.disabled = disabled; //boolean value, affects events
     this.hasChild = hasChild; //boolean value, affects events
   }
@@ -26,8 +26,9 @@ export class Adult extends Person {
 export class Child extends Person {
 // The Child class generates after a family has at least 1 Adult present. This class represents individuals under 18 years old.
 // Fires child-specific events.
-  constructor(ageGroup, firstName, lastName, gender, insured = false) {
+  constructor(ageGroup, firstName, lastName, gender, insured = false, infant = true) {
     super(ageGroup, firstName, lastName, gender, insured)
+    this.infant = infant; // boolean value.
   }
 }
 
