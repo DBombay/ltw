@@ -1,4 +1,5 @@
-// This file *defines* the classes for each Person-type
+// This file defines the classes for each Person-type and the methods used to randomize values for an individual
+// person, but not the generation of people within the context of a family.
 
 class Person {
 // Person base class contains the basic elements for the engine to add family members. This class shouldn't exist outside of
@@ -39,4 +40,32 @@ export class Senior extends Person {
     super(ageGroup, firstName, lastName, gender, insured);
     this.disabled = disabled; //boolean value, affects events
   }
+}
+
+export function determineGender() {
+  // This method randomizes gender by 50%. We need to assign a 1 or 0 so that Faker can use gender specific names.
+  return Math.floor(Math.random() * 2)
+}
+
+export function determineInsured() {
+  // This method randomizes whether or not the individual is insured. If the expression returns any
+  // number over 90, the individual will be un-insured (In 2016, there were about 27.3 million people
+  // 8.6 percent of the population) who lacked health insurance)
+  return Math.floor(Math.random() * 101) < 90
+}
+
+export function determinedEmployment() {
+  // This method randomizes whether or not the individual is employed. The game doesn't account for how much income a
+  // family member generates, just whether or not they are employed. Although census data points to a 3.9% unemployment
+  // rate, the ratio here is 10% for the sake of the game.
+  return Math.floor(Math.random() * 101) < 90
+}
+
+export function determineDisabled() {
+  // This method randomizes whether or not the individual is disabled. If the expression returns any
+  // number over 91, the individual will be disabled (About 56.7 million people — 19 percent of the population — had
+  // a disability in 2010, according to a broad definition of disability, with more than half of them reporting the
+  // disability was severe, according to a comprehensive report on this population released today by the U.S. Census
+  // Bureau. We're using the 'severe' disability value here.)
+  return Math.floor(Math.random() * 101) > 91
 }
