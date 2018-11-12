@@ -1,4 +1,6 @@
-// This file defines the family class. Extracting the logic here allows more scalability.
+// This file defines the family class. The generation of family objects for the purpose of the game is handled
+// in GenerateFamily. Story elements like barriers are present in HumanizePeople.js
+
 import Barrier from './Barrier'
 
 export default class Family {
@@ -8,6 +10,7 @@ export default class Family {
     children = null,
     seniors = null,
     barrier = new Barrier,
+    home = null,
     familyStatus = {text: 'UNAWARE', averageStatValue: 0},
     foodStat = 0,
     housingStat = 0,
@@ -20,6 +23,7 @@ export default class Family {
     this.children = children; // Randomly generated in GenerateFamily.js
     this.seniors = seniors; // Randomly generated in GenerateFamily.js
     this.barrier = barrier; // barrier Object. Initially empty.
+    this.home = home; // Home object. Initially empty
     this.familyStatus = familyStatus; // Object with string and integer. Text initially set to 'Unaware'
                                       // (only unset from Unaware when barrier is overcome) and averageStatValue is
                                       // initially 0 (represents avg of the 5 stat groups immediately following).

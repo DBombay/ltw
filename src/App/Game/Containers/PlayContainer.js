@@ -1,7 +1,8 @@
 import React from 'react'
-import {Fade, Card, Button, CardTitle, CardBody, CardText, CardHeader, NavLink} from 'reactstrap'
+import {Fade, Card, Button, CardTitle, CardBody, CardText, CardHeader} from 'reactstrap'
 import {generateFamily, StatusToolbar, PersonSummary} from "../../Game";
 import ChildrenSummary from "../Components/ChildrenSummary";
+import HousingSummary from '../Components/HousingSummary'
 
 export default class PlayContainer extends React.Component {
   constructor(props) {
@@ -92,6 +93,7 @@ export default class PlayContainer extends React.Component {
             {secondarySummary}
             <ChildrenSummary family={family}/>
             {seniorSummary}
+            <HousingSummary family={family}/>
             <CardText>
               The {primary.lastName} household's biggest barrier is {family.barrier.text}
             </CardText>

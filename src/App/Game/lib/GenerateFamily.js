@@ -1,10 +1,10 @@
-// This file deals with all functions randomizing family generation. This includes the generation of individuals and the
-// assignment of their attributes. The most important method here is the generateFamily function, which is the only one
-// exported.
+// This file deals with all functions randomizing family generation. The most important method here is the
+// generateFamily function, which is the only one exported.
 
 import faker from 'faker'
-import {Senior, Adult, Child} from './Person'
+import {Senior, Adult, Child, determineGender, determineInsured, determinedEmployment, determineDisabled} from './Person'
 import Family from './Family'
+import {generateHomeFor} from './Home'
 import Data from './HumanizePeople'
 
 export function generateFamily() {
@@ -134,6 +134,10 @@ export function generateFamily() {
   let randomBarrier = Math.floor(Math.random() * Object.keys(Data.barriers).length);
   family.barrier = Data.barriers[randomBarrier];
 
+
+  // Now we generate a home for the family.
+  family.home = generateHomeFor(family);
+
   // We return the family from this method so the player can meet them!
   // (This method should only be fired in the PlayContainer)
   return family
@@ -178,33 +182,7 @@ function generateSenior(lastName) {
   )
 }
 
-function determineGender() {
-  // This method randomizes gender by 50%. We need to assign a 1 or 0 so that Faker can use gender specific names.
-  return Math.floor(Math.random() * 2)
-}
 
-function determineInsured() {
-  // This method randomizes whether or not the individual is insured. If the expression returns any
-  // number over 90, the individual will be un-insured (In 2016, there were about 27.3 million people
-  // 8.6 percent of the population) who lacked health insurance)
-  return Math.floor(Math.random() * 101) < 90
-}
-
-function determinedEmployment() {
-  // This method randomizes whether or not the individual is employed. The game doesn't account for how much income a
-  // family member generates, just whether or not they are employed. Although census data points to a 3.9% unemployment
-  // rate, the ratio here is 10% for the sake of the game.
-  return Math.floor(Math.random() * 101) < 90
-}
-
-function determineDisabled() {
-  // This method randomizes whether or not the individual is disabled. If the expression returns any
-  // number over 91, the individual will be disabled (About 56.7 million people — 19 percent of the population — had
-  // a disability in 2010, according to a broad definition of disability, with more than half of them reporting the
-  // disability was severe, according to a comprehensive report on this population released today by the U.S. Census
-  // Bureau. We're using the 'severe' disability value here.)
-  return Math.floor(Math.random() * 101) > 91
-}
 
 function determinePartnerFor(primary) {
   // After the primary family member is generated, this function will determine if a secondary, partner family member is
@@ -234,7 +212,7 @@ function callTheStork(lastName) {
   // Here, we determine if the last child is an infant or not. Infants reduce family income. This reduction occurs in the
   // same place that we assign the 'hasChild', right under 'family.children = callTheStork(familyName);'
   if (children.length > 0 && (Math.floor(Math.random() * 101) < 35)) {
-    children[children.length-1].infant = true
+    children[children.length - 1].infant = true
   }
   return children
 }
@@ -253,4 +231,3 @@ function generateSeniors(lastName) {
   }
   return seniors
 }
-
