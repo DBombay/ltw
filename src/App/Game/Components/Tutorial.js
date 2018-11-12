@@ -1,19 +1,19 @@
 import React from 'react'
-import {CardBody, CardTitle, CardText} from "reactstrap";
+import {CardBody, CardTitle, CardText, Button} from "reactstrap";
 
-export default function Tutorial() {
+export default function Tutorial(props) {
   return (
     <CardBody className='offset-md-2 col-md-8 col-sm-12'>
       <CardTitle className='text-center h2'>How To Play</CardTitle>
       <div className='text-justify'>
         <CardText>
-        Welcome to Lead the Way! Here, you'll help an otherwise struggling family
-        achieve financial independence by introducing them to benefits and helping
-        them apply for the ones that will assist them the most!
+          Welcome to Lead the Way! Here, you'll help an otherwise struggling family
+          achieve financial independence by introducing them to benefits and helping
+          them apply for the ones that will assist them the most!
         </CardText>
         <CardText>
-        Below, you can see the toolbar that will help you track your family's
-        status:
+          Below, you can see the toolbar that will help you track your family's
+          status:
         </CardText>
         <ul>
           <li className='my-2'>
@@ -33,25 +33,25 @@ export default function Tutorial() {
           </li>
 
           <li className='my-2'>
-            <strong>Food:</strong> This bar represents your family's access to regular, nutritional meals
+            <strong>Food:</strong> This dial represents your family's access to regular, nutritional meals
           </li>
 
           <li className="my-2">
-            <strong>Housing:</strong> This bar represents your family's access to warm, secure housing.
+            <strong>Housing:</strong> This dial represents your family's access to warm, secure housing.
           </li>
 
           <li className="my-2">
-            <strong>Health:</strong> This bar represents your family's access to reliable health care.
+            <strong>Health:</strong> This dial represents your family's access to reliable health care.
           </li>
 
           <li className="my-2">
-            <strong>Income:</strong> This bar represents your family's disposable income. As you help them, funds that
+            <strong>Income:</strong> This dial represents your family's disposable income. As you help them, funds that
             would otherwise be spent sustaining the family (or even non-existent funds) can instead be invested
             into the family's growth and future!
           </li>
 
           <li className="my-2">
-            <strong>Well-Being:</strong> This bar represents your family's overall emotional health. Food on the table,
+            <strong>Well-Being:</strong> This dial represents your family's overall emotional health. Food on the table,
             access to education and child care, and a warm home all contribute to the well-being of your family.
           </li>
         </ul>
@@ -66,6 +66,11 @@ export default function Tutorial() {
         <br/>
         <p className='text-center'>When you're ready, click <span className='badge badge-info badge-lg'>'Meet My Family!'</span> to
           get started!</p>
+      </div>
+      <div className="row justify-content-center">
+        <Button size='lg' color='info' className='my-3 col-auto' onClick={() => {
+          props.handleFamilyGeneration()
+        }}>Meet My Family!</Button>
       </div>
     </CardBody>
   )

@@ -12,7 +12,7 @@ export default function StartContainer() {
         </div>
         <div className="text-center col-6 offset-3">
           <div>
-            <Button size='lg' color='warning' href={`/game/how-to-play`} className='my-2 col-md-4'>New Game</Button>
+            <Button size='lg' color='warning' href={`/game`} className='my-2 col-md-4'>New Game</Button>
           </div>
           <div>
             <Button size='lg' color='danger' href={`/glossary`} className='my-2 col-md-4'>Glossary</Button>
