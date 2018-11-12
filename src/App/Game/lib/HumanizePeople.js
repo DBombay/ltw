@@ -10,7 +10,7 @@ export default {
     new Barrier('welfare-bias', "stigma: 'Aren't benefits for people too lazy to help themselves?'"),
     new Barrier('undocumented-immigrant', "citizenship: 'What about deportation? Who can we really trust?'"),
     new Barrier('technical-barrier', "spotty internet access: 'Usually use the local library's WiFi in a pinch. Their hours are limited though.'"),
-    new Barrier('technical-barrier', `only ${family.primary.firstName} has a cellphone. "It's hard to coordinate with other members of the family or schedule consultations."`),
+    new Barrier('technical-barrier', `there's only one cellphone that the head of household uses: "It's hard to coordinate with other members of the family or schedule consultations."`),
     new Barrier('physical-disability', "mobility: 'It's too much of a pain to get around. This world isn't built for people like us.'"),
     new Barrier('knowledge-lack', "benefit awareness: 'Isn't it just, like, Social Security and food stamps?'"),
     new Barrier('previous-eligibility', "their assumption about likely eligibility: 'We weren't able to get much help before. Not sure what's different enough to go through that again.'"),
