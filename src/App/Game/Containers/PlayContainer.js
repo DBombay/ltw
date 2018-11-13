@@ -1,5 +1,5 @@
 import React from 'react'
-import {CardHeader, Card, CardTitle} from 'reactstrap'
+import {CardHeader, Card, CardTitle, CardBody} from 'reactstrap'
 import {generateFamily, FamilySummary, StatusToolbar, Tutorial} from "../../Game";
 
 export default class PlayContainer extends React.Component {
@@ -39,21 +39,23 @@ export default class PlayContainer extends React.Component {
 
   render() {
     return (
-      <div className='container mh-100 h-100 flex-row align-items-center'>
-        <Card className='my-2 align-self-center'>
+      <div className='container align-self-center'>
+        <Card className='my-2 align-self-center mh-100 h-100'>
           <CardHeader>
             <CardTitle className='text-center h2 text-capitalize'>{this.state.cardHeader}</CardTitle>
           </CardHeader>
-          {(!this.state.family && !this.state.gameStarted) ? (
-            <Tutorial handleFamilyGeneration={this.handleFamilyGeneration}/>
-          ) : (
-            <FamilySummary
-              family={this.state.family}
-              handleFamilyGeneration={this.handleFamilyGeneration}
-              resetFamily={this.resetFamily}
-              startGame={this.startGame}
-            />
-          )}
+          <CardBody>
+            {(!this.state.family && !this.state.gameStarted) ? (
+              <Tutorial handleFamilyGeneration={this.handleFamilyGeneration}/>
+            ) : (
+              <FamilySummary
+                family={this.state.family}
+                handleFamilyGeneration={this.handleFamilyGeneration}
+                resetFamily={this.resetFamily}
+                startGame={this.startGame}
+              />
+            )}
+          </CardBody>
           <StatusToolbar family={this.state.family}/>
         </Card>
       </div>

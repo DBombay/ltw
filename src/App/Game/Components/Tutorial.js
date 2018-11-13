@@ -3,7 +3,7 @@ import {CardBody, CardText, Button} from "reactstrap";
 
 export default function Tutorial(props) {
   return (
-    <div className='game-space'>
+    <div className='game-space verticalExpansion'>
       <CardBody className='offset-md-2 col-md-8 col-sm-12'>
         <div className='text-justify'>
           <CardText>

@@ -4,7 +4,7 @@ import {PlayContainer} from '../../Game'
 
 export default function GameContainer() {
   return(
-    <div>
+    <div className='verticalExpansion'>
       <Route exact path={`/game`} component={PlayContainer}/>
     </div>
   )

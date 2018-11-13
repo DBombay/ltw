@@ -45,7 +45,7 @@ export default function generateFamilySummary(props) {
     }
   }
   return (
-    <div className='justify-content-center game-space'>
+    <div className='justify-content-center game-space verticalExpansion'>
       <CardBody className="text-justify offset-md-2 col-md-8 col-sm-12">
         <CardTitle className='text-center display-4'>Meet the {primary.lastName} family!</CardTitle>
         <div>
