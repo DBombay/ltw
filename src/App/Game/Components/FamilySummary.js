@@ -1,14 +1,9 @@
 import {ChildrenSummary, PersonSummary, HousingSummary} from "../../Game";
-import {CardText, CardHeader, CardTitle, CardBody, Button} from "reactstrap";
+import {CardText, CardBody, CardTitle, Button} from "reactstrap";
 import React from "react";
 
 export default function generateFamilySummary(props) {
   const family = props.family;
-
-  // We first check to see if a family exists. If not, we kill the code block.
-  if (family === null) {
-    return null
-  }
 
   // For simplicity's sake, we assign all the family variables to instance variables. This also makes the conditional
   // checks for children and seniors a bit easier to write.
@@ -16,18 +11,19 @@ export default function generateFamilySummary(props) {
   let secondary = family.secondary;
   let seniors = family.seniors;
 
+  // props.updateHeader(`Meet the ${primary.lastName} family!`);
+
   // We'll set up the placeholders
-  let secondarySummary;
   let seniorSummary;
 
   // if a secondary family member exists, we generate their content here. Otherwise we tell the user how lonely the
   // primary is...
-  if (secondary) {
-    secondarySummary = <PersonSummary person={secondary} role="secondary" primaryFirstName={primary.firstName}/>
-  } else {
-    secondarySummary =
-      <CardText>{primary.firstName} doesn't have a partner to help manage the household expenses.</CardText>
-  }
+  const secondarySummary = secondary ? (
+    <PersonSummary person={secondary} role="secondary" primaryFirstName={primary.firstName}/>
+  ) : (
+    <CardText>{primary.firstName} doesn't have a partner to help manage the household expenses.</CardText>
+  );
+
 
   // Next (almost done) we discuss if there are any seniors living with the household.
   if (seniors) {
@@ -49,11 +45,9 @@ export default function generateFamilySummary(props) {
     }
   }
   return (
-    <div className='justify-content-center'>
-      <CardHeader>
-        <CardTitle className="text-center">Meet the {primary.lastName} family!</CardTitle>
-      </CardHeader>
+    <div className='justify-content-center game-space'>
       <CardBody className="text-justify offset-md-2 col-md-8 col-sm-12">
+        <CardTitle className='text-center display-4'>Meet the {primary.lastName} family!</CardTitle>
         <div>
           <PersonSummary person={primary} role="primary"/>
           {secondarySummary}
@@ -71,8 +65,10 @@ export default function generateFamilySummary(props) {
         </div>
 
         <div className="row justify-content-center my-1">
-          <a onClick={props.handleFamilyGeneration} className='alert-link btn text-primary align-text-bottom'>Try a Different Family?</a>
-          <a onClick={props.resetFamily} className='alert-link btn text-primary align-text-bottom'>Go Back to Tutorial</a>
+          <a onClick={props.handleFamilyGeneration} className='alert-link btn text-primary align-text-bottom'>Try a
+            Different Family?</a>
+          <a onClick={props.resetFamily} className='alert-link btn text-primary align-text-bottom'>Go Back to
+            Tutorial</a>
         </div>
       </CardBody>
     </div>
