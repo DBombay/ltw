@@ -45,7 +45,7 @@ export default function generateFamilySummary(props) {
     }
   }
   return (
-    <div className='justify-content-center game-space verticalExpansion'>
+    <div className='justify-content-center flex-column game-space verticalExpansion'>
       <CardBody className="text-justify offset-md-2 col-md-8 col-sm-12 align-self-center">
         <CardTitle className='text-center display-4'>Meet the {primary.lastName} family!</CardTitle>
         <div>
@@ -60,13 +60,13 @@ export default function generateFamilySummary(props) {
         </div>
       </CardBody>
 
-      <div className="mt-5 align-self-baseline">
+      <div className="mt-5 align-self-end">
         <div className="row justify-content-center my-1">
           <Button color='primary' size='lg'>Lead the Way for
             the {primary.lastName} Family!</Button>
         </div>
 
-        <div className="row justify-content-center my-1">
+        <div className="row justify-content-center my-1 align-self-end">
           <a onClick={props.handleFamilyGeneration} className='alert-link btn text-primary align-text-bottom'>Try a
             Different Family?</a>
           <a onClick={props.resetFamily} className='alert-link btn text-primary align-text-bottom'>Go Back to
