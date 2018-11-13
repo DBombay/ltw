@@ -58,18 +58,20 @@ export default function generateFamilySummary(props) {
             The {primary.lastName} household's biggest barrier is {family.barrier.text}
           </CardText>
         </div>
+      </CardBody>
 
+      <div className="mt-5 align-self-baseline">
         <div className="row justify-content-center my-1">
           <Button color='primary' size='lg'>Lead the Way for
             the {primary.lastName} Family!</Button>
         </div>
 
-      </CardBody>
-      <div className="row justify-content-center my-3">
-        <a onClick={props.handleFamilyGeneration} className='alert-link btn text-primary align-text-bottom'>Try a
-          Different Family?</a>
-        <a onClick={props.resetFamily} className='alert-link btn text-primary align-text-bottom'>Go Back to
-          Tutorial</a>
+        <div className="row justify-content-center my-1">
+          <a onClick={props.handleFamilyGeneration} className='alert-link btn text-primary align-text-bottom'>Try a
+            Different Family?</a>
+          <a onClick={props.resetFamily} className='alert-link btn text-primary align-text-bottom'>Go Back to
+            Tutorial</a>
+        </div>
       </div>
     </div>
   )

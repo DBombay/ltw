@@ -56,7 +56,7 @@ export default class StatusToolbar extends React.Component {
 
   render() {
     return (
-      <CardFooter>
+      <CardFooter className='position-static'>
         <div className='offset-md-1 col-md-10'>
           <div className="row justify-content-center">
             <span className="h4 text-center">
