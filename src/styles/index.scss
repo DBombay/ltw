@@ -1,10 +1,14 @@
 @import '../../node_modules/bootstrap/scss/bootstrap';
 
-html, body {height: 100%;}
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
 
 .game-space {
   max-height: 70vh;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .App {

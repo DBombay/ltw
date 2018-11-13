@@ -46,7 +46,7 @@ export default function generateFamilySummary(props) {
   }
   return (
     <div className='justify-content-center game-space verticalExpansion'>
-      <CardBody className="text-justify offset-md-2 col-md-8 col-sm-12">
+      <CardBody className="text-justify offset-md-2 col-md-8 col-sm-12 align-self-center">
         <CardTitle className='text-center display-4'>Meet the {primary.lastName} family!</CardTitle>
         <div>
           <PersonSummary person={primary} role="primary"/>
@@ -64,13 +64,13 @@ export default function generateFamilySummary(props) {
             the {primary.lastName} Family!</Button>
         </div>
 
-        <div className="row justify-content-center my-1">
-          <a onClick={props.handleFamilyGeneration} className='alert-link btn text-primary align-text-bottom'>Try a
-            Different Family?</a>
-          <a onClick={props.resetFamily} className='alert-link btn text-primary align-text-bottom'>Go Back to
-            Tutorial</a>
-        </div>
       </CardBody>
+      <div className="row justify-content-center my-3">
+        <a onClick={props.handleFamilyGeneration} className='alert-link btn text-primary align-text-bottom'>Try a
+          Different Family?</a>
+        <a onClick={props.resetFamily} className='alert-link btn text-primary align-text-bottom'>Go Back to
+          Tutorial</a>
+      </div>
     </div>
   )
 }
