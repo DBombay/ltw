@@ -6311,3 +6311,20 @@ a.text-dark:hover, a.text-dark:focus {
   .table .thead-dark th {
     color: inherit;
     border-color: #dee2e6; } }
+
+html, body {
+  height: 100%;
+  overflow-x: hidden; }
+
+.game-space {
+  max-height: 70vh;
+  overflow-y: auto;
+  overflow-x: hidden; }
+
+.App {
+  display: flex;
+  height: 100vh;
+  flex-direction: column; }
+
+.verticalExpansion {
+  height: 80vh !important; }

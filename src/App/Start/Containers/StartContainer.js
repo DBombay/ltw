@@ -1,24 +1,28 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {Button} from 'reactstrap'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {Card, Button, CardHeader, CardFooter, CardTitle, CardBody } from 'reactstrap'
 
 export default function StartContainer() {
   return (
-    <div className="container h-100">
-      <div className="align-self-center">
-        <div className=' my-4 text-center'>
-          <h1 className='display-4'>Lead the Way</h1>
+    <div className="container d-flex align-items-center h-100 justify-content-center">
+      <Card>
+        <CardHeader className='text-center'>
+          <CardTitle className='display-4'>Lead the Way</CardTitle>
+        </CardHeader>
+
+        <CardBody className='row justify-content-center'>
           <FontAwesomeIcon icon="hands-helping" size='9x'/>
-        </div>
-        <div className="text-center col-6 offset-3">
+        </CardBody>
+
+        <CardFooter className='row justify-content-center'>
           <div>
-            <Button size='lg' color='warning' href={`/game/how-to-play`} className='my-2 col-md-4'>New Game</Button>
+            <Button size='lg' color='warning' href={`/game`} className='mx-1 col-auto'>New Game</Button>
           </div>
           <div>
-            <Button size='lg' color='danger' href={`/glossary`} className='my-2 col-md-4'>Glossary</Button>
+            <Button size='lg' color='danger' href={`/glossary`} className='mx-1 col-auto'>Glossary</Button>
           </div>
-        </div>
-      </div>
+        </CardFooter>
+      </Card>
     </div>
   )
 }
