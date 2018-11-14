@@ -29,7 +29,7 @@ export default class PlayContainer extends React.Component {
   handleLeadTheWay() {
     this.setState({
       gameStarted: true,
-      cardHeader: `Helping the ${this.state.family.primary.lastName} overcome their barrier`
+      cardHeader: `the ${this.state.family.primary.lastName}'s barrier`
     })
   }
 

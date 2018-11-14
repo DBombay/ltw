@@ -3,8 +3,11 @@ import {ListGroupItem} from 'reactstrap'
 
 export default function SolutionSelect(props){
   return(
-    <ListGroupItem onClick={() => {
-      evaluateResponse(solution)
-    }} className='offset-3 col-6 border btn btn-p text-center'>{props.text}</ListGroupItem>
+    <ListGroupItem
+      className='offset-3 col-6 text-center my-1'
+      id={props.id}
+      onClick={() => {props.onClick(props.solution)}}>
+      {props.solution.text}
+      </ListGroupItem>
   )
 }
