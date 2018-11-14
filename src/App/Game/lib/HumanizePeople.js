@@ -4,7 +4,8 @@ import Barrier from './Barrier'
 
 export default {
   barriers: [
-    //Complete the sentence: `The ${family.primary.lastName}'s biggest barrier is...`
+    // IMPORTANT: Make sure you also update the barrierEvents in the EventDeck.js if you make a new key!
+    // Complete the sentence: `The ${family.primary.lastName}'s biggest barrier is...`
     new Barrier('non-native-speaker', "language: 'We stay in the area. It's easier. Neighbors speak the same language as we do."),
     new Barrier('no-personal-vehicle', "convenient transportation: 'Public transit is okay, but sometimes it takes two or more transfers.'"),
     new Barrier('welfare-bias', "stigma: 'Aren't benefits for people too lazy to help themselves?'"),

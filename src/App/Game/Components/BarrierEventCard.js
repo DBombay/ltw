@@ -1,29 +1,48 @@
 import React from 'react'
+import {CardTitle, CardBody} from 'reactstrap'
 import Events from '../lib/EventDeck'
 
-export default class BarrierEventCard extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      family: null,
-      event: null
-    }
-  }
+export default function BarrierEventCard(props) {
+  const family = props.family;
+  const barrier = family.barrier;
+  const eventInfo = Events.barrierEvents[barrier.key];
 
-  componentDidMount(props) {
-    this.setState(
-      {
-        family: props.family,
-        event: Events[props.family.barrier.key]
-      }
+  function retrieveBarrierEventText() {
+    return (
+      <CardBody className='text-center'>
+        {eventInfo.text}
+      </CardBody>
     )
   }
 
-  render() {
-    return(
-      <div className='justify-content-center flex-column game-space verticalExpansion'>
+  function evaluateResponse(solution) {
+    console.log(solution.impactValue, solution.explainValue)
+  }
 
-      </div>
+  function retrieveEventSolutions() {
+    const solutions = eventInfo.solutions.forEach(function (solution) {
+      return (
+        <li onClick={() => {
+          evaluateResponse(solution)
+        }} className='w-100 border border-dark'>{solution.text}</li>
+      )
+    })
+
+    return (
+      <CardBody>
+        <ul>
+          {solutions}
+        </ul>
+      </CardBody>
     )
   }
+
+  return (
+    <div className='justify-content-center flex-column game-space verticalExpansion'>
+      <CardTitle className="row justify-content-center">{barrier.key}</CardTitle>
+      {retrieveBarrierEventText()}
+      {retrieveEventSolutions()}
+    </div>
+  )
+
 }

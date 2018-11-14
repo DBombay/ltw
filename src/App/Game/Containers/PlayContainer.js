@@ -1,6 +1,6 @@
 import React from 'react'
 import {CardHeader, Card, CardTitle, CardBody} from 'reactstrap'
-import {generateFamily, FamilySummary, StatusToolbar, Tutorial} from "../../Game";
+import {generateFamily, FamilySummary, StatusToolbar, Tutorial, BarrierEventCard} from "../../Game";
 
 export default class PlayContainer extends React.Component {
   constructor(props) {
@@ -8,10 +8,12 @@ export default class PlayContainer extends React.Component {
     this.handleFamilyGeneration = this.handleFamilyGeneration.bind(this);
     this.resetFamily = this.resetFamily.bind(this);
     this.startGame = this.startGame.bind(this);
+    this.handleLeadTheWay = this.handleLeadTheWay.bind(this);
     this.state = {
       cardHeader: "How To Play",
       family: null,
-      gameStarted: false
+      gameStarted: false,
+      barrierOvercome: false,
     }
   }
 
@@ -22,7 +24,19 @@ export default class PlayContainer extends React.Component {
       family: generated,
       cardHeader: `The ${generated.primary.lastName} Family`
     });
-    console.log(generated)  //debug feature. Should be removed prior to deployment
+  }
+
+  handleLeadTheWay() {
+    this.setState({
+      gameStarted: true,
+      cardHeader: `Helping the ${this.state.family.primary.lastName} overcome their barrier`
+    })
+  }
+
+  handleOvercomeBarrier() {
+    this.setState({
+      barrierOvercome: true
+    })
   }
 
   resetFamily() {
@@ -45,16 +59,21 @@ export default class PlayContainer extends React.Component {
             <CardTitle className='text-center h2 text-capitalize'>{this.state.cardHeader}</CardTitle>
           </CardHeader>
           <CardBody>
-            {(!this.state.family && !this.state.gameStarted) ? (
-              <Tutorial handleFamilyGeneration={this.handleFamilyGeneration}/>
-            ) : (
+            {(!this.state.family && !this.state.gameStarted && !this.state.barrierOvercome) ?
+              <Tutorial handleFamilyGeneration={this.handleFamilyGeneration}/> : null}
+            {(this.state.family && !this.state.gameStarted && !this.state.barrierOvercome) ?
               <FamilySummary
-                family={this.state.family}
-                handleFamilyGeneration={this.handleFamilyGeneration}
-                resetFamily={this.resetFamily}
-                startGame={this.startGame}
-              />
-            )}
+              family={this.state.family}
+              handleLeadTheWay={this.handleLeadTheWay}
+              handleFamilyGeneration={this.handleFamilyGeneration}
+              resetFamily={this.resetFamily}
+              startGame={this.startGame}
+            /> : null}
+
+            {(this.state.family && this.state.gameStarted && !this.state.barrierOvercome) ?
+              <BarrierEventCard family={this.state.family} handleOvercomeBarrier={this.handleOvercomeBarrier}/> : null}
+            {(this.state.family && this.state.gameStarted && this.state.barrierOvercome) ?
+              <div>Reg Events</div> : null}
           </CardBody>
           <StatusToolbar family={this.state.family}/>
         </Card>

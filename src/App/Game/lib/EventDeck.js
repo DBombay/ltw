@@ -1,21 +1,76 @@
-import {BarrierEvent} from "./Event";
-import Solution from './Solution'
+import Solution from "./Solution"
 
 export default {
-  barrierEvents: [
-    new BarrierEvent (
-      "As you saw in the family's summary, their barrier to access benefits is that they head of household" +
-      "is a non-native speaker. Many families feel intimidated or excluded from benefits do to the advanced English typically" +
-      "involved in the documentation. What fact can you provide that will help them overcome this barrier?",
-      "You overcame their barrier of being non-native speakers by ",
-      [new Solution(4, "Federal laws dictate that interpreters must be made available for non-native speakers.",
-        {explanation: "They're thrilled to learn that interpreters will be available to answer their questions and capture their information correctly!"},
-        "informing them of federal laws."),
-        new Solution(1, "They're welcome to bring their kids to translate for them",
-          {explanation: "Federal law dictates that interpreters would be available. They'll be able to answer questions" +
-              "and capture information that a child may not understand or translate well."})
-      ],
-      "non-native-speaker"
-      )
-  ]
+  barrierEvents: {
+    "non-native-speaker": {
+      text: "What fact will help them over come not being a native speaker?",
+      solutions: [
+        new Solution(4, "I'm the right answer, pick me", "You picked the right one!", "Selected the right answer for non-native-speaker"),
+        new Solution(1, "I'm the wrong answer", "Nope. Try again.")
+      ]
+    },
+    "no-personal-vehicle": {
+      text: "What fact will help them over come not having a personal vehicle?",
+      solutions: [
+        new Solution(4, "I'm the right answer, pick me", "You picked the right one!", "Selected the right answer for non-native-speaker"),
+        new Solution(1, "I'm the wrong answer", "Nope. Try again.")
+      ]
+    },
+    "welfare-bias": {
+      text: "What fact will help them over come having welfare bias?",
+      solutions: [
+        new Solution(4, "I'm the right answer, pick me", "You picked the right one!", "Selected the right answer for non-native-speaker"),
+        new Solution(1, "I'm the wrong answer", "Nope. Try again.")
+      ]
+    },
+    "undocumented-immigrant": {
+      text: "What fact will help them over come not being a naturalized citizen?",
+      solutions: [
+        new Solution(4, "I'm the right answer, pick me", "You picked the right one!", "Selected the right answer for non-native-speaker"),
+        new Solution(1, "I'm the wrong answer", "Nope. Try again.")
+      ]
+    },
+    "technical-barrier": {
+      text: "What fact will address their technical barrier?",
+      solutions: [
+        new Solution(4, "I'm the right answer, pick me", "You picked the right one!", "Selected the right answer for non-native-speaker"),
+        new Solution(1, "I'm the wrong answer", "Nope. Try again.")
+      ]
+    },
+    "physical-disability": {
+      text: "What fact will help them overcome their barrier present from their disability?",
+      solutions: [
+        new Solution(4, "I'm the right answer, pick me", "You picked the right one!", "Selected the right answer for non-native-speaker"),
+        new Solution(1, "I'm the wrong answer", "Nope. Try again.")
+      ]
+    },
+    "knowledge-lack": {
+      text: "What facts will help fill their knowledge gap?",
+      solutions: [
+        new Solution(4, "I'm the right answer, pick me", "You picked the right one!", "Selected the right answer for non-native-speaker"),
+        new Solution(1, "I'm the wrong answer", "Nope. Try again.")
+      ]
+    },
+    "previous-eligibility": {
+      text: "What will help them over come their past experience?",
+      solutions: [
+        new Solution(4, "I'm the right answer, pick me", "You picked the right one!", "Selected the right answer for non-native-speaker"),
+        new Solution(1, "I'm the wrong answer", "Nope. Try again.")
+      ]
+    },
+    "no-time": {
+      text: "How can they MAKE TIME?!",
+      solutions: [
+        new Solution(4, "I'm the right answer, pick me", "You picked the right one!", "Selected the right answer for non-native-speaker"),
+        new Solution(1, "I'm the wrong answer", "Nope. Try again.")
+      ]
+    },
+    "previous-experience": {
+      text: "How can we help them to see that what's in the past is in the past?",
+      solutions: [
+        new Solution(4, "I'm the right answer, pick me", "You picked the right one!", "Selected the right answer for non-native-speaker"),
+        new Solution(1, "I'm the wrong answer", "Nope. Try again.")
+      ]
+    }
+  }
 }
