@@ -1,6 +1,7 @@
 import React from 'react'
-import {CardTitle, CardBody} from 'reactstrap'
+import {CardTitle, CardBody, ListGroup} from 'reactstrap'
 import Events from '../lib/EventDeck'
+import SolutionSelect from "./SolutionSelect";
 
 export default function BarrierEventCard(props) {
   const family = props.family;
@@ -20,19 +21,15 @@ export default function BarrierEventCard(props) {
   }
 
   function retrieveEventSolutions() {
-    const solutions = eventInfo.solutions.forEach(function (solution) {
-      return (
-        <li onClick={() => {
-          evaluateResponse(solution)
-        }} className='w-100 border border-dark'>{solution.text}</li>
-      )
-    })
-
     return (
       <CardBody>
-        <ul>
-          {solutions}
-        </ul>
+        <ListGroup>
+          {eventInfo.solutions.map(solution => {
+            return (
+              <SolutionSelect text={solution.text}/>
+            )
+          })}
+        </ListGroup>
       </CardBody>
     )
   }
