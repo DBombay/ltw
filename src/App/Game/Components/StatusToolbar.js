@@ -42,12 +42,14 @@ export default class StatusToolbar extends React.Component {
 
   determineColor(value) {
     switch (true) {
-      case value < 2:
+      case value < 25:
         return 'danger';
-      case value > 1 && value < 4:
+      case value >= 25 && value < 80:
         return 'warning';
-      case value >= 4:
+      case value >= 80 && value < 100:
         return 'success';
+      case value >= 100:
+        return 'info';
       default:
         return 'info'
     }
