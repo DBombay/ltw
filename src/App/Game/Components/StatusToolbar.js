@@ -9,12 +9,13 @@ export default class StatusToolbar extends React.Component {
   constructor(props) {
     super(props);
     this.family = this.props.family;
+    this.determineFamilyStatusText = this.determineFamilyStatusText.bind(this);
     this.determineColor = this.determineColor.bind(this);
 
     // I'm setting state here because we use this toolbar to
     // explain how to play the game.
     this.state = {
-      statText: "UNAWARE",
+      statText: "unaware",
       statValue: 0,
       food: 10,
       housing: 30,
@@ -55,6 +56,30 @@ export default class StatusToolbar extends React.Component {
     }
   }
 
+  determineFamilyStatusText(family) {
+    if (!family) {
+      return 'unaware'
+    }
+
+    const average = family.familyStatus.averageStatValue;
+    let textValue;
+    if (family.familyStatus.text.toLowerCase() === 'unaware') {
+      return textValue = "unaware"
+    } else {
+      switch (true) {
+        case average < 25:
+          return textValue = 'aware';
+        case average >= 25 && average < 50:
+          return textValue = 'assisted';
+        case average >= 50 && average < 90:
+          return textValue = 'mobile';
+        case average >= 90:
+          return textValue = 'independent';
+      }
+    }
+    family.familyStatus.text = textValue
+  }
+
 
   render() {
     return (
@@ -63,8 +88,9 @@ export default class StatusToolbar extends React.Component {
           <div className="row justify-content-center">
             <span className="h4 text-center">
               <strong className='text-dark'>Family Status:</strong>
-              <span className={`badge badge-${this.determineColor(this.state.statValue)} text-white mx-2`}>
-                {this.state.statText}
+              <span
+                className={`badge badge-${this.determineColor(this.state.statValue)} text-white mx-2 text-uppercase`}>
+                {this.determineFamilyStatusText(this.props.family)}
               </span>
             </span>
           </div>

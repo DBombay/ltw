@@ -101,5 +101,4 @@ export default class BarrierEventCard extends React.Component {
       </div>
     )
   }
-
 }

@@ -39,7 +39,7 @@ export default class PlayContainer extends React.Component {
   }
 
   handleOvercomeBarrier() {
-    this.state.family.familyStatus = {text: 'AWARE', averageStatValue: this.averageStats(this.state.family)};
+    this.state.family.familyStatus = {text: 'aware', averageStatValue: this.averageStats(this.state.family)};
     this.setState({
       barrierOvercome: true,
       cardHeader: `The ${this.state.family.primary.lastName} Family`
