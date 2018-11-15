@@ -1,5 +1,5 @@
 import React from 'react'
-import {CardTitle, CardBody, CardText, ListGroup} from 'reactstrap'
+import {Button, CardTitle, CardBody, CardText, ListGroup} from 'reactstrap'
 import Events from '../lib/EventDeck'
 import SolutionSelect from "./SolutionSelect";
 
@@ -7,9 +7,10 @@ export default class BarrierEventCard extends React.Component {
   constructor(props) {
     super(props);
     this.evaluateSelected = this.evaluateSelected.bind(this);
-    this.retrieveEventSolutions = this.retrieveEventSolutions.bind(this);
     this.determineCorrectSolution = this.determineCorrectSolution.bind(this);
+    this.handleOvercomeBarrier = this.props.handleOvercomeBarrier;
     this.renderExplanation = this.renderExplanation.bind(this);
+    this.retrieveEventSolutions = this.retrieveEventSolutions.bind(this);
     this.state = {
       family: props.family,
       barrier: props.family.barrier,
@@ -54,7 +55,7 @@ export default class BarrierEventCard extends React.Component {
 
   renderExplanation() {
     return (
-      <div>
+      <div className='mt-5'>
         {this.state.eventInfo.solutions.map(solution => {
           if (solution.key === this.state.selectedResponse) {
             return (
@@ -64,9 +65,21 @@ export default class BarrierEventCard extends React.Component {
                     {solution.impactValue === 4 ? "Great Choice!" : "Try Again"}
                   </span>
                 </div>
-                <div className='row justify-content-center'>
+
+                <div className='row justify-content-center my-2'>
                   <CardText className='text-center'>{solution.explanation}</CardText>
                 </div>
+
+                {(solution.impactValue === 4) &&
+                <div className="row justify-content-center my-3">
+                  <Button
+                    size='lg'
+                    color='primary'
+                    outline
+                    onClick={this.handleOvercomeBarrier}>
+                    Great Work!
+                  </Button>
+                </div>}
               </div>
             )
           }

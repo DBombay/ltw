@@ -9,15 +9,20 @@ export default class PlayContainer extends React.Component {
     this.resetFamily = this.resetFamily.bind(this);
     this.startGame = this.startGame.bind(this);
     this.handleLeadTheWay = this.handleLeadTheWay.bind(this);
+    this.handleOvercomeBarrier = this.handleOvercomeBarrier.bind(this);
     this.state = {
       cardHeader: "How To Play",
       family: null,
       gameStarted: false,
       barrierOvercome: false,
+      playedEvents: []
     }
   }
 
-  // This function fires the generateFamily() method from GenerateFamily.js
+  averageStats(family) {
+    return (family.foodStat + family.housingStat + family.healthStat + family.incomeStat + family.wellbeingStat)/5
+  }
+
   handleFamilyGeneration() {
     let generated = generateFamily();
     this.setState({
@@ -34,8 +39,10 @@ export default class PlayContainer extends React.Component {
   }
 
   handleOvercomeBarrier() {
+    this.state.family.familyStatus = {text: 'AWARE', averageStatValue: this.averageStats(this.state.family)};
     this.setState({
-      barrierOvercome: true
+      barrierOvercome: true,
+      cardHeader: `The ${this.state.family.primary.lastName} Family`
     })
   }
 
