@@ -1,3 +1,4 @@
+import BarrierEventCard from './Components/BarrierEventCard'
 import ChildrenSummary from './Components/ChildrenSummary'
 import FamilySummary from './Components/FamilySummary'
 import GameContainer from './Containers/GameContainer'
@@ -9,6 +10,7 @@ import StatusToolbar from './Components/StatusToolbar'
 import Tutorial from './Components/Tutorial'
 
 export {
+  BarrierEventCard,
   ChildrenSummary,
   GameContainer as default,
   FamilySummary,

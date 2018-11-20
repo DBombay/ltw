@@ -1,6 +1,6 @@
 import React from 'react'
 import {CardHeader, Card, CardTitle, CardBody} from 'reactstrap'
-import {generateFamily, FamilySummary, StatusToolbar, Tutorial} from "../../Game";
+import {generateFamily, FamilySummary, StatusToolbar, Tutorial, BarrierEventCard} from "../../Game";
 
 export default class PlayContainer extends React.Component {
   constructor(props) {
@@ -8,21 +8,42 @@ export default class PlayContainer extends React.Component {
     this.handleFamilyGeneration = this.handleFamilyGeneration.bind(this);
     this.resetFamily = this.resetFamily.bind(this);
     this.startGame = this.startGame.bind(this);
+    this.handleLeadTheWay = this.handleLeadTheWay.bind(this);
+    this.handleOvercomeBarrier = this.handleOvercomeBarrier.bind(this);
     this.state = {
       cardHeader: "How To Play",
       family: null,
-      gameStarted: false
+      gameStarted: false,
+      barrierOvercome: false,
+      playedEvents: []
     }
   }
 
-  // This function fires the generateFamily() method from GenerateFamily.js
+  averageStats(family) {
+    return (family.foodStat + family.housingStat + family.healthStat + family.incomeStat + family.wellbeingStat)/5
+  }
+
   handleFamilyGeneration() {
     let generated = generateFamily();
     this.setState({
       family: generated,
       cardHeader: `The ${generated.primary.lastName} Family`
     });
-    console.log(generated)  //debug feature. Should be removed prior to deployment
+  }
+
+  handleLeadTheWay() {
+    this.setState({
+      gameStarted: true,
+      cardHeader: `the ${this.state.family.primary.lastName}'s barrier`
+    })
+  }
+
+  handleOvercomeBarrier() {
+    this.state.family.familyStatus = {text: 'aware', averageStatValue: this.averageStats(this.state.family)};
+    this.setState({
+      barrierOvercome: true,
+      cardHeader: `The ${this.state.family.primary.lastName} Family`
+    })
   }
 
   resetFamily() {
@@ -40,21 +61,26 @@ export default class PlayContainer extends React.Component {
   render() {
     return (
       <div className='container align-self-center'>
-        <Card className='my-2 align-self-center mh-100 h-100'>
+        <Card className='my-2 align-self-center mh-100 h-100 shadow-lg'>
           <CardHeader>
             <CardTitle className='text-center h2 text-capitalize'>{this.state.cardHeader}</CardTitle>
           </CardHeader>
           <CardBody>
-            {(!this.state.family && !this.state.gameStarted) ? (
-              <Tutorial handleFamilyGeneration={this.handleFamilyGeneration}/>
-            ) : (
+            {(!this.state.family && !this.state.gameStarted && !this.state.barrierOvercome) ?
+              <Tutorial handleFamilyGeneration={this.handleFamilyGeneration}/> : null}
+            {(this.state.family && !this.state.gameStarted && !this.state.barrierOvercome) ?
               <FamilySummary
-                family={this.state.family}
-                handleFamilyGeneration={this.handleFamilyGeneration}
-                resetFamily={this.resetFamily}
-                startGame={this.startGame}
-              />
-            )}
+              family={this.state.family}
+              handleLeadTheWay={this.handleLeadTheWay}
+              handleFamilyGeneration={this.handleFamilyGeneration}
+              resetFamily={this.resetFamily}
+              startGame={this.startGame}
+            /> : null}
+
+            {(this.state.family && this.state.gameStarted && !this.state.barrierOvercome) ?
+              <BarrierEventCard family={this.state.family} handleOvercomeBarrier={this.handleOvercomeBarrier}/> : null}
+            {(this.state.family && this.state.gameStarted && this.state.barrierOvercome) ?
+              <div>Reg Events</div> : null}
           </CardBody>
           <StatusToolbar family={this.state.family}/>
         </Card>
