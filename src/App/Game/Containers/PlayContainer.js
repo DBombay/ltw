@@ -1,6 +1,7 @@
 import React from 'react'
 import {CardHeader, Card, CardTitle, CardBody} from 'reactstrap'
 import {generateFamily, FamilySummary, StatusToolbar, Tutorial, BarrierEventCard} from "../../Game";
+import EventCard from "../Components/EventCard";
 
 export default class PlayContainer extends React.Component {
   constructor(props) {
@@ -19,6 +20,10 @@ export default class PlayContainer extends React.Component {
 
   averageStats(family) {
     return (family.foodStat + family.housingStat + family.healthStat + family.incomeStat + family.wellbeingStat) / 5
+  }
+
+  handleEventUpdates() {
+    console.log('click')
   }
 
   handleFamilyGeneration() {
@@ -76,7 +81,8 @@ export default class PlayContainer extends React.Component {
               handleOvercomeBarrier={this.handleOvercomeBarrier}
             />}
 
-            {(this.state.stage === "eventDeck") && <div>Reg Events</div>}
+            {(this.state.stage === "eventDeck") && <EventCard family={this.state.family} updateFamily={this.handleEventUpdates}/>}
+
           </CardBody>
           <StatusToolbar family={this.state.family}/>
         </Card>
