@@ -7,33 +7,32 @@ export default class PlayContainer extends React.Component {
     super(props);
     this.handleFamilyGeneration = this.handleFamilyGeneration.bind(this);
     this.resetFamily = this.resetFamily.bind(this);
-    this.startGame = this.startGame.bind(this);
     this.handleLeadTheWay = this.handleLeadTheWay.bind(this);
     this.handleOvercomeBarrier = this.handleOvercomeBarrier.bind(this);
     this.state = {
       cardHeader: "How To Play",
       family: null,
-      gameStarted: false,
-      barrierOvercome: false,
+      stage: "tutorial",
       playedEvents: []
     }
   }
 
   averageStats(family) {
-    return (family.foodStat + family.housingStat + family.healthStat + family.incomeStat + family.wellbeingStat)/5
+    return (family.foodStat + family.housingStat + family.healthStat + family.incomeStat + family.wellbeingStat) / 5
   }
 
   handleFamilyGeneration() {
     let generated = generateFamily();
     this.setState({
       family: generated,
+      stage: "familyGenerator",
       cardHeader: `The ${generated.primary.lastName} Family`
     });
   }
 
   handleLeadTheWay() {
     this.setState({
-      gameStarted: true,
+      stage: "barrier",
       cardHeader: `the ${this.state.family.primary.lastName}'s barrier`
     })
   }
@@ -41,20 +40,15 @@ export default class PlayContainer extends React.Component {
   handleOvercomeBarrier() {
     this.state.family.familyStatus = {text: 'aware', averageStatValue: this.averageStats(this.state.family)};
     this.setState({
-      barrierOvercome: true,
+      stage: "eventDeck",
       cardHeader: `The ${this.state.family.primary.lastName} Family`
     })
   }
 
   resetFamily() {
     this.setState({
-      family: null
-    })
-  }
-
-  startGame() {
-    this.setState({
-      gameStart: true
+      family: null,
+      stage: "tutorial"
     })
   }
 
@@ -66,21 +60,24 @@ export default class PlayContainer extends React.Component {
             <CardTitle className='text-center h2 text-capitalize'>{this.state.cardHeader}</CardTitle>
           </CardHeader>
           <CardBody>
-            {(!this.state.family && !this.state.gameStarted && !this.state.barrierOvercome) ?
-              <Tutorial handleFamilyGeneration={this.handleFamilyGeneration}/> : null}
-            {(this.state.family && !this.state.gameStarted && !this.state.barrierOvercome) ?
-              <FamilySummary
+            {(this.state.stage === "tutorial") && <Tutorial handleFamilyGeneration={this.handleFamilyGeneration}/>}
+
+            {(this.state.stage === "familyGenerator") &&
+            <FamilySummary
               family={this.state.family}
               handleLeadTheWay={this.handleLeadTheWay}
               handleFamilyGeneration={this.handleFamilyGeneration}
               resetFamily={this.resetFamily}
-              startGame={this.startGame}
-            /> : null}
+            />
+            }
 
-            {(this.state.family && this.state.gameStarted && !this.state.barrierOvercome) ?
-              <BarrierEventCard family={this.state.family} handleOvercomeBarrier={this.handleOvercomeBarrier}/> : null}
-            {(this.state.family && this.state.gameStarted && this.state.barrierOvercome) ?
-              <div>Reg Events</div> : null}
+            {(this.state.stage === "barrier") &&
+            <BarrierEventCard
+              family={this.state.family}
+              handleOvercomeBarrier={this.handleOvercomeBarrier}
+            />
+            }
+            {(this.state.stage === "eventDeck") &&  <div>Reg Events</div>}
           </CardBody>
           <StatusToolbar family={this.state.family}/>
         </Card>
