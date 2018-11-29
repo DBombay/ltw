@@ -60,7 +60,7 @@ export default function generateFamilySummary(props) {
         </div>
       </CardBody>
 
-      <div className="mt-5 align-self-end">
+      <div className="mt-5 align-items-end">
         <div className="row justify-content-center my-1">
           <Button color='primary' size='lg' onClick={props.handleLeadTheWay}>Lead the Way for
             the {primary.lastName} Family!</Button>

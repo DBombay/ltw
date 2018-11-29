@@ -68,16 +68,16 @@ export default class PlayContainer extends React.Component {
               handleLeadTheWay={this.handleLeadTheWay}
               handleFamilyGeneration={this.handleFamilyGeneration}
               resetFamily={this.resetFamily}
-            />
-            }
+            />}
 
             {(this.state.stage === "barrier") &&
             <BarrierEventCard
               family={this.state.family}
               handleOvercomeBarrier={this.handleOvercomeBarrier}
-            />
-            }
-            {(this.state.stage === "eventDeck") &&  <div>Reg Events</div>}
+            />}
+
+            {(this.state.stage === "eventDeck") && <div>Reg Events</div>}
+
           </CardBody>
           <StatusToolbar family={this.state.family}/>
         </Card>
