@@ -5,6 +5,7 @@ import faker from 'faker'
 import {Senior, Adult, Child, determineGender, determineInsured, determinedEmployment, determineDisabled} from './Person'
 import Family from './Family'
 import {generateHomeFor} from './Home'
+import generateNeeds from './GenerateNeeds'
 import Data from './HumanizePeople'
 
 export function generateFamily() {
@@ -137,6 +138,9 @@ export function generateFamily() {
 
   // Now we generate a home for the family.
   family.home = generateHomeFor(family);
+
+  // We determine what needs the family starts with.
+  family.needs = generateNeeds(family)
 
   // We return the family from this method so the player can meet them!
   // (This method should only be fired in the PlayContainer)

@@ -82,5 +82,8 @@ export default {
         new Solution(3, 1, "I'm a misleading answer", "Here's an explanation why this answer was close, but not the best. Is there another answer that could fit better?")
       ]
     }
+  },
+  needEvents: {
+
   }
 }
