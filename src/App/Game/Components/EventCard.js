@@ -14,7 +14,6 @@ export default class EventCard extends React.Component {
 
   shuffleTheDeck(family) {
     let potentialEvents = []
-
     console.log(potentialEvents)
   }
 

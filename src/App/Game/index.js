@@ -1,5 +1,6 @@
 import BarrierEventCard from './Components/BarrierEventCard'
 import ChildrenSummary from './Components/ChildrenSummary'
+import EventCard from './Components/EventCard'
 import FamilySummary from './Components/FamilySummary'
 import GameContainer from './Containers/GameContainer'
 import {generateFamily} from "./lib/GenerateFamily";
@@ -13,8 +14,9 @@ import Tutorial from './Components/Tutorial'
 export {
   BarrierEventCard,
   ChildrenSummary,
-  GameContainer as default,
+  EventCard,
   FamilySummary,
+  GameContainer as default,
   generateFamily,
   generateNeeds,
   HousingSummary,

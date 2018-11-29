@@ -1,7 +1,6 @@
 import React from 'react'
 import {CardHeader, Card, CardTitle, CardBody} from 'reactstrap'
-import {generateFamily, FamilySummary, StatusToolbar, Tutorial, BarrierEventCard} from "../../Game";
-import EventCard from "../Components/EventCard";
+import {generateFamily, FamilySummary, StatusToolbar, Tutorial, BarrierEventCard, EventCard} from "../../Game";
 
 export default class PlayContainer extends React.Component {
   constructor(props) {
