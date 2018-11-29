@@ -1,4 +1,5 @@
-import react from 'react'
+import React from 'react'
+import {shuffle} from '../../helpers.js'
 import Data from '../lib/EventDeck'
 
 
@@ -12,8 +13,11 @@ export default class EventCard extends React.Component {
   }
 
   shuffleTheDeck(family) {
-    
+    let potentialEvents = []
+
+    console.log(potentialEvents)
   }
+
 
   render(){
     return(

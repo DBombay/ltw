@@ -45,7 +45,7 @@ export default class PlayContainer extends React.Component {
   handleOvercomeBarrier() {
     this.state.family.familyStatus = {text: 'aware', averageStatValue: this.averageStats(this.state.family)};
     this.setState({
-      stage: "eventDeck",
+      stage: "events",
       cardHeader: `The ${this.state.family.primary.lastName} Family`
     })
   }
@@ -81,7 +81,7 @@ export default class PlayContainer extends React.Component {
               handleOvercomeBarrier={this.handleOvercomeBarrier}
             />}
 
-            {(this.state.stage === "eventDeck") && <EventCard family={this.state.family} updateFamily={this.handleEventUpdates}/>}
+            {(this.state.stage === "events") && <EventCard family={this.state.family} updateFamily={this.handleEventUpdates}/>}
 
           </CardBody>
           <StatusToolbar family={this.state.family}/>
