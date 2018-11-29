@@ -77,7 +77,6 @@ export default class PlayContainer extends React.Component {
             />}
 
             {(this.state.stage === "eventDeck") && <div>Reg Events</div>}
-
           </CardBody>
           <StatusToolbar family={this.state.family}/>
         </Card>
