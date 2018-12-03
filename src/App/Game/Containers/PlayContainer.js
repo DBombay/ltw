@@ -57,6 +57,7 @@ export default class PlayContainer extends React.Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <div className='container align-self-center'>
         <Card className='my-2 align-self-center mh-100 h-100 shadow-lg'>

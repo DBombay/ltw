@@ -21,7 +21,7 @@ export default class StatusToolbar extends React.Component {
       housing: 30,
       health: 50,
       income: 80,
-      wellbeing: 100
+      wellbeing: 125
     }
   }
 
