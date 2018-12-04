@@ -15,7 +15,7 @@ export default class EventCard extends React.Component {
     this.state = {
       family: props.family,
       eventDeck: this.shuffleTheDeck(props.family),
-      selectedEvent: Data.jobEvents.primaryHasJob["Bonus Pay"],
+      selectedEvent: Data.neutralEvents.primaryEvents["It's cold & flu season!"],
       selectedResponse: null
     }
   }
@@ -87,9 +87,10 @@ export default class EventCard extends React.Component {
   shuffleTheDeck(family) {
     let potentialEvents = []
 
-    if (family.primary.employed) {
-      potentialEvents.push(Data.jobEvents.primaryHasJob)
-    }
+    potentialEvents.push(Data.neutralEvents.primaryEvents["It's cold & flu season!"])
+    // if (family.primary.employed) {
+    //   potentialEvents.push(Data.jobEvents.primaryHasJob)
+    // }
 
     shuffle(potentialEvents)
     console.log(potentialEvents)
@@ -99,7 +100,7 @@ export default class EventCard extends React.Component {
     return (
       <div className='justify-content-center flex-column game-space verticalExpansion'>
         <CardTitle
-          className="row justify-content-center text-capitalize display-4">{"Bonus Pay"}</CardTitle>
+          className="row justify-content-center text-capitalize display-4">{"It's cold & flu season!"}</CardTitle>
         <CardBody className='text-center'>
           {this.state.selectedEvent.text(this.state)}
         </CardBody>
