@@ -1,6 +1,6 @@
 import React from 'react'
 import {Button, CardTitle, CardBody, CardText, ListGroup} from 'reactstrap'
-import Events from '../lib/EventDeck'
+import barriers from '../lib/BarrierEventDeck'
 import SolutionSelect from "./SolutionSelect";
 
 export default class BarrierEventCard extends React.Component {
@@ -14,7 +14,7 @@ export default class BarrierEventCard extends React.Component {
     this.state = {
       family: props.family,
       barrier: props.family.barrier,
-      eventInfo: Events.barrierEvents[props.family.barrier.key],
+      eventInfo: barriers[props.family.barrier.key],
       selectedResponse: null,
       correctResponse: this.determineCorrectSolution
     }
@@ -62,15 +62,15 @@ export default class BarrierEventCard extends React.Component {
               <div key={solution.key} id={solution.key}>
                 <div className='row justify-content-center'>
                   <span className='text-center h2'>
-                    {solution.impactValue === 4 ? "Great Choice!" : "Try Again"}
+                    {solution.impactHeader}
                   </span>
                 </div>
 
                 <div className='row justify-content-center my-2'>
-                  <CardText className='text-center'>{solution.explanation}</CardText>
+                  <CardText className='text-center'>{solution.impactExplanation}</CardText>
                 </div>
 
-                {(solution.impactValue === 4) &&
+                {(solution.impactHeader === "Great Choice!") &&
                 <div className="row justify-content-center my-3">
                   <Button
                     size='lg'

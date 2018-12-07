@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom'
 import {library} from '@fortawesome/fontawesome-svg-core';
-import {faHandsHelping} from '@fortawesome/free-solid-svg-icons'
+import {faHandsHelping, faPlus, faMinus} from '@fortawesome/free-solid-svg-icons'
 import {StartContainer} from './Start'
 import GameContainer from './Game'
 import {GlossaryContainer} from "./Glossary";
 
-library.add(faHandsHelping);
+library.add(faHandsHelping, faPlus, faMinus);
 
 class App extends Component {
   constructor(props) {

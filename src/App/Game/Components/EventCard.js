@@ -1,6 +1,6 @@
 import React from 'react'
 import {shuffle} from '../../helpers.js'
-import Data from '../lib/EventDeck'
+import Events from '../lib/EventDeck'
 import{CardBody, ListGroup, CardText, Button, CardTitle} from 'reactstrap'
 import SolutionSelect from "./SolutionSelect";
 
@@ -10,12 +10,12 @@ export default class EventCard extends React.Component {
     super(props)
     this.shuffleTheDeck = this.shuffleTheDeck.bind(this)
     this.evaluateSelected = this.evaluateSelected.bind(this);
-    this.renderExplanation = this.renderExplanation.bind(this);
+    this.renderImpactText = this.renderImpactText.bind(this);
     this.retrieveEventSolutions = this.retrieveEventSolutions.bind(this);
     this.state = {
       family: props.family,
       eventDeck: this.shuffleTheDeck(props.family),
-      selectedEvent: Data.neutralEvents.primaryEvents["It's cold & flu season!"],
+      selectedEvent: Events.neutral.primaryEvents.hasJobEvents[1],
       selectedResponse: null
     }
   }
@@ -35,6 +35,7 @@ export default class EventCard extends React.Component {
             return (
               <SolutionSelect
                 solution={s}
+                disabled={this.state.selectedResponse}
                 onClick={this.evaluateSelected}
                 key={s.key}
                 id={s.key}
@@ -46,7 +47,7 @@ export default class EventCard extends React.Component {
     )
   }
 
-  renderExplanation() {
+  renderImpactText() {
     return (
       <div className='mt-5'>
         {this.state.selectedEvent.solutions.map(solution => {
@@ -56,15 +57,12 @@ export default class EventCard extends React.Component {
               <div key={s.key} id={s.key}>
                 <div className='row justify-content-center'>
                   <span className='text-center h2'>
-                    {s.impactValue === 4 && "Great Choice!"}
-                    {s.impactValue === 3 && "Good Choice!"}
-                    {s.impactValue === 2 && "Okay Choice"}
-                    {s.impactValue === 1 && "Not the Best Choice"}
+                    {s.impactHeader}
                   </span>
                 </div>
 
                 <div className='row justify-content-center my-2'>
-                  <CardText className='text-center'>{s.explanation}</CardText>
+                  <CardText className='text-center'>{s.impactExplanation}</CardText>
                 </div>
 
                 <div className="row justify-content-center my-3">
@@ -87,7 +85,6 @@ export default class EventCard extends React.Component {
   shuffleTheDeck(family) {
     let potentialEvents = []
 
-    potentialEvents.push(Data.neutralEvents.primaryEvents["It's cold & flu season!"])
     // if (family.primary.employed) {
     //   potentialEvents.push(Data.jobEvents.primaryHasJob)
     // }
@@ -100,12 +97,12 @@ export default class EventCard extends React.Component {
     return (
       <div className='justify-content-center flex-column game-space verticalExpansion'>
         <CardTitle
-          className="row justify-content-center text-capitalize display-4">{"It's cold & flu season!"}</CardTitle>
+          className="row justify-content-center text-capitalize display-4">{this.state.selectedEvent.title}</CardTitle>
         <CardBody className='text-center'>
           {this.state.selectedEvent.text(this.state)}
         </CardBody>
         {this.retrieveEventSolutions()}
-        {this.renderExplanation()}
+        {this.renderImpactText()}
       </div>
     )
   }
