@@ -1,6 +1,6 @@
 import React from 'react'
 import {Button, CardTitle, CardBody, CardText, ListGroup} from 'reactstrap'
-import barriers from '../lib/BarrierEventDeck'
+import {barriers} from '../lib/Events/AwareEventsDeck'
 import SolutionSelect from "./SolutionSelect";
 
 export default class BarrierEventCard extends React.Component {

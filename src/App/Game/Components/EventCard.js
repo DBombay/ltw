@@ -1,14 +1,12 @@
 import React from 'react'
-import {shuffle} from '../../helpers.js'
-import Events from '../lib/EventDeck'
 import{CardBody, ListGroup, CardText, Button, CardTitle} from 'reactstrap'
+import shuffleTheDeck from '../lib/DeckShuffler'
 import SolutionSelect from "./SolutionSelect";
 
 
 export default class EventCard extends React.Component {
   constructor(props) {
     super(props)
-    this.shuffleTheDeck = this.shuffleTheDeck.bind(this)
     this.evaluateSelected = this.evaluateSelected.bind(this);
     this.renderImpactText = this.renderImpactText.bind(this);
     this.retrieveEventSolutions = this.retrieveEventSolutions.bind(this);
@@ -82,16 +80,7 @@ export default class EventCard extends React.Component {
     )
   }
 
-  shuffleTheDeck(family) {
-    let potentialEvents = []
 
-    // if (family.primary.employed) {
-    //   potentialEvents.push(Data.jobEvents.primaryHasJob)
-    // }
-
-    shuffle(potentialEvents)
-    console.log(potentialEvents)
-  }
 
   render() {
     return (
