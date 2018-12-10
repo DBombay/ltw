@@ -1,6 +1,6 @@
 import React from 'react'
 import {CardBody, ListGroup, CardText, Button, CardTitle} from 'reactstrap'
-import shuffleTheDeck from '../lib/DeckShuffler'
+import drawEventCard from '../lib/DrawEventCard'
 import SolutionSelect from "./SolutionSelect";
 
 
@@ -12,30 +12,15 @@ export default class EventCard extends React.Component {
     this.retrieveEventSolutions = this.retrieveEventSolutions.bind(this);
     this.state = {
       family: props.family,
-      eventDeck: null,
-      selectedEvent: null,
+      selectedEvent: drawEventCard(props.family),
       selectedResponse: null
     }
-  }
-
-  componentDidMount() {
-    debugger;
-    let startingDeck = shuffleTheDeck(this.props.family);
-    const firstEvent = startingDeck.pop();
-
-    this.setState({
-      eventDeck: startingDeck,
-      selectedEvent: firstEvent
-    })
   }
 
   evaluateSelected(solution) {
     this.setState({
       selectedResponse: solution.key
     })
-  }
-
-  drawFromTheDeck(deck) {
   }
 
   retrieveEventSolutions() {
@@ -94,7 +79,6 @@ export default class EventCard extends React.Component {
     )
   }
 
-
   render() {
     return (
       <div className='justify-content-center flex-column game-space verticalExpansion'>
@@ -111,7 +95,6 @@ export default class EventCard extends React.Component {
         </span>
         }
       </div>
-
     )
   }
 }
