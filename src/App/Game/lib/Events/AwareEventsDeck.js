@@ -84,7 +84,7 @@ export const barriers =
     }
   };
 
-export const events =
+export const awareEvents =
   {
     primaryEvents: {
       employed: [],

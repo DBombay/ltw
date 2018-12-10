@@ -1,5 +1,5 @@
 import React from 'react'
-import{CardBody, ListGroup, CardText, Button, CardTitle} from 'reactstrap'
+import {CardBody, ListGroup, CardText, Button, CardTitle} from 'reactstrap'
 import shuffleTheDeck from '../lib/DeckShuffler'
 import SolutionSelect from "./SolutionSelect";
 
@@ -12,16 +12,30 @@ export default class EventCard extends React.Component {
     this.retrieveEventSolutions = this.retrieveEventSolutions.bind(this);
     this.state = {
       family: props.family,
-      eventDeck: this.shuffleTheDeck(props.family),
-      selectedEvent: Events.neutral.primaryEvents.hasJobEvents[1],
+      eventDeck: null,
+      selectedEvent: null,
       selectedResponse: null
     }
+  }
+
+  componentDidMount() {
+    debugger;
+    let startingDeck = shuffleTheDeck(this.props.family);
+    const firstEvent = startingDeck.pop();
+
+    this.setState({
+      eventDeck: startingDeck,
+      selectedEvent: firstEvent
+    })
   }
 
   evaluateSelected(solution) {
     this.setState({
       selectedResponse: solution.key
     })
+  }
+
+  drawFromTheDeck(deck) {
   }
 
   retrieveEventSolutions() {
@@ -68,7 +82,7 @@ export default class EventCard extends React.Component {
                     size='lg'
                     color='primary'
                     outline
-                    >
+                  >
                     Continue
                   </Button>
                 </div>
@@ -81,18 +95,23 @@ export default class EventCard extends React.Component {
   }
 
 
-
   render() {
     return (
       <div className='justify-content-center flex-column game-space verticalExpansion'>
-        <CardTitle
-          className="row justify-content-center text-capitalize display-4">{this.state.selectedEvent.title}</CardTitle>
+        {this.state.selectedEvent &&
+        <span>
+        <CardTitle className="row justify-content-center text-capitalize display-4">
+          {this.state.selectedEvent.title}
+        </CardTitle>
         <CardBody className='text-center'>
           {this.state.selectedEvent.text(this.state)}
         </CardBody>
-        {this.retrieveEventSolutions()}
-        {this.renderImpactText()}
+          {this.retrieveEventSolutions()}
+          {this.renderImpactText()}
+        </span>
+        }
       </div>
+
     )
   }
 }
