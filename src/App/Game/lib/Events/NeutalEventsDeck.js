@@ -31,8 +31,9 @@ export default {
         title: "It's cold & flu season!",
         text: (props => `${props.family.primary.firstName} caught a bad cold! ${props.family.primary.gender === "male" ? "His" : "Her"} manager said that PTO can't be taken this week. They're just too swamped at the office. What should ${props.family.primary.firstName} do?`),
         solutions: [
-          (props => new Solution(1, `${props.family.primary.firstName} decides to fight through it and go to work anyway.`, "There are bills to pay...", `${props.family.primary.firstName} feels like ${props.family.primary.gender === "male" ? "his" : "her"} cold is getting worse.`)),
-          (props => new Solution(2, `${props.family.primary.firstName} decides to take a half day to make it to the clinic.`, "Gotta get better!", `${props.family.primary.gender === "male" ? "His" : "Her"} manager was very unhappy and said ${props.family.primary.firstName}'s pay would be docked.`))
+          (props => new Solution(1, `Fight through it and go to work anyway.`, "There are bills to pay...", `${props.family.primary.firstName} feels like ${props.family.primary.gender === "male" ? "his" : "her"} cold is getting worse.`)),
+          (props => new Solution(2, `Take a half day to make it to the clinic.`, "Gotta get better!", `${props.family.primary.firstName}'s manager was very unhappy and said ${props.family.primary.firstName}'s pay would be docked.`)),
+          (props => new Solution(3, `Stay home.`, "It's the responsible thing to do.", `${props.family.primary.firstName}'s manager was very unhappy and said ${props.family.primary.firstName}'s pay would be docked.`))
         ]
       }
     ],
