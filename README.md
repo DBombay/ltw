@@ -12,7 +12,7 @@ The app uses React.js and Bootstrap. File structure typically separates files by
   ***HUGE*** shout out to Marisa and Myra for their input and support on this project :)
 
 ### Documentation and Communication
-- *Confluence*: N/A
+- *Confluence*: NOPE. Check out the Github wiki instead.
 - *Slack Channel*: N/A
 - *Wrike Label*: N/A
 
