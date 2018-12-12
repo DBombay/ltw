@@ -9,22 +9,22 @@ export default {
         text: (props => `${props.family.primary.firstName} received a bonus as recognition for ${props.family.primary.gender === "male" ? "his" : "her"} exemplary effort at work! Where should the money go?`),
         solutions: [
           (props => new Solution(1, "Into a savings account for a rainy day", "A Penny Saved, right?", "Setting aside emergency funds is always a good decision.", `${props.family.primary.firstName} deposited a bonus check into a savings account`, {
-            'income': 5,
-            'wellbeing': 5
+            income: 5,
+            wellbeing: 5
           })),
           (props => new Solution(2, "Toward some healthy groceries", "The Fridge is filled!", "Groceries for home-cooked meals are a healthy and cost-effective way to keep the family fed.", `${props.family.primary.firstName} used their bonus pay to buy groceries`, {
-            'food': 5,
-            'wellbeing': 5
+            food: 5,
+            wellbeing: 5
           })),
           (props => new Solution(3, "Set aside for living expenses", "No late fees this month!", "Rent and mortgages are often the biggest expenses for families each month.", `${props.family.primary.firstName} used their bonus pay to offset living expenses`, {
-            "housing": 5,
-            "wellbeing": 5
+            housing: 5,
+            wellbeing: 5
           })),
           (props => new Solution(4, "Schedule a visit with the family Doctor", "Hello, doctor?", "Even with insurance, co-pays and premiums can be barriers to seeking medical attention", `${props.family.primary.firstName} used a bonus check to cover a medical visit`, {
-            "health": 5,
-            "wellbeing": 5
+            health: 5,
+            wellbeing: 5
           })),
-          (props => new Solution(5, "A family night out!", "Dinner and a Movie!", "A fun night out is a great way to burn off stress and build memories", `${props.family.primary.firstName} used a bonus check to treat the family to a wonderful evening`, {"wellbeing": 10}))
+          (props => new Solution(5, "A family night out!", "Dinner and a Movie!", "A fun night out is a great way to burn off stress and build memories", `${props.family.primary.firstName} used a bonus check to treat the family to a wonderful evening`, {wellbeing: 10}))
         ]
       },
       {

@@ -31,12 +31,12 @@ export default class StatusToolbar extends React.Component {
     if (this.family) {
       this.setState({
         statText: props.family.familyStatus.text,
-        statValue: props.family.familyStatus.averageStatValue,
-        food: props.family.foodStat,
-        housing: props.family.housingStat,
-        health: props.family.healthStat,
-        income: props.family.incomeStat,
-        wellbeing: props.family.wellbeingStat
+        statValue: props.family.averageStats(),
+        food: props.family.food,
+        housing: props.family.housing,
+        health: props.family.health,
+        income: props.family.income,
+        wellbeing: props.family.wellbeing
       })
     }
   }

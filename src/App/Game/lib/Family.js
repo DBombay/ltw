@@ -12,11 +12,11 @@ export default class Family {
     barrier = new Barrier,
     home = null,
     familyStatus = {text: 'UNAWARE', averageStatValue: 0},
-    foodStat = 0,
-    housingStat = 0,
-    healthStat = 0,
-    incomeStat = 0,
-    wellbeingStat = 0
+    food = 0,
+    housing = 0,
+    health = 0,
+    income = 0,
+    wellbeing = 0
   ) {
     this.primary = primary; //Adult or Senior object. Determined in GenerateFamily.js
     this.secondary = secondary; // Randomly generated in GenerateFamily.js
@@ -27,10 +27,14 @@ export default class Family {
     this.familyStatus = familyStatus; // Object with string and integer. Text initially set to 'Unaware'
                                       // (only unset from Unaware when barrier is overcome) and averageStatValue is
                                       // initially 0 (represents avg of the 5 stat groups immediately following).
-    this.foodStat = foodStat; // Integer value. Stores family's current food accessibility value.
-    this.housingStat = housingStat; // Integer value. Stores family's current housing status value.
-    this.healthStat = healthStat; // Integer value. Stores family's accessibility to and current overall health.
-    this.incomeStat = incomeStat; // Integer value. Stores representation of family's disposable income.
-    this.wellbeingStat = wellbeingStat; // Integer value. Represents the emotional state of the family.
+    this.food = food; // Integer value. Stores family's current food accessibility value.
+    this.housing = housing; // Integer value. Stores family's current housing status value.
+    this.health = health; // Integer value. Stores family's accessibility to and current overall health.
+    this.income = income; // Integer value. Stores representation of family's disposable income.
+    this.wellbeing = wellbeing; // Integer value. Represents the emotional state of the family.
+  }
+
+  averageStats() {
+    return ((this.food + this.housing + this.health + this.income + this.wellbeing) / 5)
   }
 }

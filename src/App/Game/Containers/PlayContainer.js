@@ -17,13 +17,7 @@ export default class PlayContainer extends React.Component {
     }
   }
 
-  averageStats(family) {
-    return (family.foodStat + family.housingStat + family.healthStat + family.incomeStat + family.wellbeingStat) / 5
-  }
 
-  handleEventUpdates() {
-    console.log('click')
-  }
 
   handleFamilyGeneration() {
     let generated = generateFamily();
@@ -42,7 +36,7 @@ export default class PlayContainer extends React.Component {
   }
 
   handleOvercomeBarrier() {
-    this.state.family.familyStatus = {text: 'aware', averageStatValue: this.averageStats(this.state.family)};
+    this.state.family.familyStatus = {text: 'aware'};
     this.setState({
       stage: "events",
       cardHeader: `The ${this.state.family.primary.lastName} Family`
@@ -81,7 +75,8 @@ export default class PlayContainer extends React.Component {
               handleOvercomeBarrier={this.handleOvercomeBarrier}
             />}
 
-            {(this.state.stage === "events") && <EventCard family={this.state.family} updateFamily={this.handleEventUpdates}/>}
+            {(this.state.stage === "events") &&
+            <EventCard family={this.state.family}/>}
 
           </CardBody>
           <StatusToolbar family={this.state.family}/>

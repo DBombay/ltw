@@ -8,8 +8,8 @@ import {shuffle} from '../../helpers.js'
 
 export default function drawEventCard(family) {
   const neutralEvents = neutralDeck;
-  const statusEvents = determineStatus(family.familyStatus.text);
-
+  debugger;
+  let statusEvents = determineStatus(family.familyStatus.text);
   let potentialEvents = [];
 
   //Add primary events first
@@ -67,12 +67,12 @@ export default function drawEventCard(family) {
     }
   }
   //Check for children, then add related events
-  if (family.children) {
+  if (family.children && family.children.length > 0) {
     potentialEvents.push(neutralEvents.childrenEvents);
     potentialEvents.push(statusEvents.childrenEvents)
   }
   //Check for seniors, then add related events
-  if (family.seniors) {
+  if (family.seniors && family.seniors.length > 0) {
     potentialEvents.push(neutralEvents.seniorEvents);
     potentialEvents.push(statusEvents.seniorEvents)
   }

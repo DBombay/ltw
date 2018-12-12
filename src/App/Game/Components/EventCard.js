@@ -23,6 +23,39 @@ export default class EventCard extends React.Component {
     })
   }
 
+  handleContinue(attrUpdates) {
+    let family = this.state.family;
+
+    if (attrUpdates.food) {
+      family.food += attrUpdates.food
+    }
+
+    if (attrUpdates.housing) {
+      family.housing += attrUpdates.housing
+    }
+
+    if (attrUpdates.health) {
+      family.health += attrUpdates.health
+    }
+
+    if (attrUpdates.income) {
+      family.income += attrUpdates.income
+    }
+
+    if (attrUpdates.wellbeing) {
+      family.wellbeing += attrUpdates.wellbeing
+    }
+
+    if (family.averageStats() >= this.statusTierThreshold(family.familyStatus.text)) {
+      // NeedEvent
+    } else {
+      this.setState({
+        family: family,
+        selectedEvent: drawEventCard(family)
+      })
+    }
+  }
+
   retrieveEventSolutions() {
     return (
       <CardBody>
@@ -67,6 +100,7 @@ export default class EventCard extends React.Component {
                     size='lg'
                     color='primary'
                     outline
+                    onClick={()=>{this.handleContinue(s.statusChanges)}}
                   >
                     Continue
                   </Button>
@@ -77,6 +111,19 @@ export default class EventCard extends React.Component {
         })}
       </div>
     )
+  }
+
+  statusTierThreshold(statusText) {
+    switch (statusText) {
+      case "aware":
+        return 35;
+      case "assisted":
+        return 60;
+      case "mobile":
+        return 85;
+      case "independent":
+        return 100
+    }
   }
 
   render() {
