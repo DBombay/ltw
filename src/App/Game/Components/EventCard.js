@@ -18,11 +18,9 @@ export default class EventCard extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    if (!this.state.selectedResponse) {
-      this.setState({
-        family: props.family
-      })
-    }
+    this.setState({
+      family: props.family
+    })
   }
 
   evaluateSelected(solution) {
@@ -47,20 +45,20 @@ export default class EventCard extends React.Component {
       family.wellbeing += solution.statusChanges.wellbeing
     }
 
-    this.props.updateFamily(family);
+    this.props.updateToolbar(family);
     this.setState({
       selectedResponse: solution.key
     })
   }
 
-  handleContinue() {
-    if (this.state.family.averageStats() >= this.statusTierThreshold(this.state.family.familyStatus.text)) {
+  handleContinue(family) {
+    if (family.averageStats() >= this.statusTierThreshold(family.familyStatus.text)) {
       // NeedEvent
       console.log("Need Event")
     } else {
-      this.props.updateFamily(this.state.family);
+      this.props.updateFamily(family);
       this.setState({
-        selectedEvent: drawEventCard(this.state.family),
+        selectedEvent: drawEventCard(family),
         selectedResponse: null
       })
     }
@@ -75,7 +73,7 @@ export default class EventCard extends React.Component {
             return (
               <SolutionSelect
                 solution={s}
-                disabled={this.state.selectedResponse}
+                disabled={this.state.selectedResponse === false}
                 onClick={this.evaluateSelected}
                 key={s.key}
                 id={s.key}
@@ -110,7 +108,7 @@ export default class EventCard extends React.Component {
                     size='lg'
                     color='primary'
                     outline
-                    onClick={this.handleContinue()}
+                    onClick={() => {this.handleContinue(this.state.family)}}
                   >
                     Continue
                   </Button>
