@@ -5,10 +5,11 @@ import {generateFamily, FamilySummary, StatusToolbar, Tutorial, BarrierEventCard
 export default class PlayContainer extends React.Component {
   constructor(props) {
     super(props);
+    this.updateFamily = this.updateFamily.bind(this)
     this.handleFamilyGeneration = this.handleFamilyGeneration.bind(this);
-    this.resetFamily = this.resetFamily.bind(this);
     this.handleLeadTheWay = this.handleLeadTheWay.bind(this);
     this.handleOvercomeBarrier = this.handleOvercomeBarrier.bind(this);
+    this.resetFamily = this.resetFamily.bind(this);
     this.state = {
       cardHeader: "How To Play",
       family: null,
@@ -17,7 +18,11 @@ export default class PlayContainer extends React.Component {
     }
   }
 
-
+  updateFamily(family) {
+    this.setState({
+      family: family
+    })
+  }
 
   handleFamilyGeneration() {
     let generated = generateFamily();
@@ -76,7 +81,7 @@ export default class PlayContainer extends React.Component {
             />}
 
             {(this.state.stage === "events") &&
-            <EventCard family={this.state.family}/>}
+            <EventCard family={this.state.family} updateFamily={this.updateFamily}/>}
 
           </CardBody>
           <StatusToolbar family={this.state.family}/>

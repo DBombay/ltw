@@ -29,12 +29,12 @@ function determineOwnedOrRentedBy(family) {
   if (owned) {
     // https://realtoru.edu/wp-content/uploads/2014/06/Homeownership-Stable-Housing.pdf. Home ownership provides
     // a lot of study-backed benefits to low income families
-    family.housingStat += 10;
-    family.healthStat += 5;
-    family.incomeStat += 5;
-    family.wellbeingStat += 5;
+    family.housing += 10;
+    family.health += 5;
+    family.income += 5;
+    family.wellbeing += 5;
   } else {
-    family.housingStat += 5;
+    family.housing += 5;
   }
   return owned
 }
@@ -46,11 +46,11 @@ function determineAffordabilityOfHome(family) {
   const affordable = Math.floor(Math.random() * 101) < 40;
 
   if (affordable) {
-    family.housingStat += 5;
-    family.wellbeingStat += 5;
+    family.housing += 5;
+    family.wellbeing += 5;
   } else {
-    family.healthStat <= 5 ? family.healthStat = 0 : family.healthStat -= 5;
-    family.wellbeingStat <= 10 ? family.wellbeingStat = 0 : family.wellbeingStat -= 10;
+    family.health <= 5 ? family.health = 0 : family.health -= 5;
+    family.wellbeing <= 10 ? family.wellbeing = 0 : family.wellbeing -= 10;
   }
   return affordable
 }
@@ -59,11 +59,11 @@ function determineIfUtilityBillsAreCurrent(family) {
   const billsPaid = Math.floor(Math.random() * 101) < 15;
 
   if (billsPaid) {
-    family.housingStat += 5;
-    family.healthStat += 5;
-    family.wellbeingStat += 5;
+    family.housing += 5;
+    family.health += 5;
+    family.wellbeing += 5;
   } else {
-    family.wellbeingStat <= 5 ? family.wellbeingStat = 0 : family.wellbeingStat -= 5;
+    family.wellbeing <= 5 ? family.wellbeing = 0 : family.wellbeing -= 5;
   }
   return billsPaid
 }
@@ -72,9 +72,9 @@ function determineIfHeated(family) {
   const heated = Math.floor(Math.random() * 101) < 25;
 
   if (!heated) {
-    family.healthStat <= 5 ? family.healthStat = 0 : family.healthStat -= 5;
-    family.wellbeingStat <= 5 ? family.wellbeingStat = 0 : family.wellbeingStat -= 5;
-    family.housingStat <= 5 ? family.housingStat = 0 : family.housingStat -= 5;
+    family.health <= 5 ? family.health = 0 : family.health -= 5;
+    family.wellbeing <= 5 ? family.wellbeing = 0 : family.wellbeing -= 5;
+    family.housing <= 5 ? family.housing = 0 : family.housing -= 5;
   }
   return heated
 }
@@ -83,8 +83,8 @@ function determineAccessToTeleComms(family) {
   const internetz = Math.floor(Math.random() * 101) < 30;
 
   if (internetz) {
-    family.housingStat += 5;
-    family.wellbeingStat += 5;
+    family.housing += 5;
+    family.wellbeing += 5;
   }
 
   return internetz

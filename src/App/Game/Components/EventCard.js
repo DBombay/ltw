@@ -17,41 +17,51 @@ export default class EventCard extends React.Component {
     }
   }
 
+  componentWillReceiveProps(props) {
+    if (!this.state.selectedResponse) {
+      this.setState({
+        family: props.family
+      })
+    }
+  }
+
   evaluateSelected(solution) {
+    let family = this.state.family
+    if (solution.statusChanges.food) {
+      family.food += solution.statusChanges.food
+    }
+
+    if (solution.statusChanges.housing) {
+      family.housing += solution.statusChanges.housing
+    }
+
+    if (solution.statusChanges.health) {
+      family.health += solution.statusChanges.health
+    }
+
+    if (solution.statusChanges.income) {
+      family.income += solution.statusChanges.income
+    }
+
+    if (solution.statusChanges.wellbeing) {
+      family.wellbeing += solution.statusChanges.wellbeing
+    }
+
+    this.props.updateFamily(family);
     this.setState({
       selectedResponse: solution.key
     })
   }
 
-  handleContinue(attrUpdates) {
-    let family = this.state.family;
-
-    if (attrUpdates.food) {
-      family.food += attrUpdates.food
-    }
-
-    if (attrUpdates.housing) {
-      family.housing += attrUpdates.housing
-    }
-
-    if (attrUpdates.health) {
-      family.health += attrUpdates.health
-    }
-
-    if (attrUpdates.income) {
-      family.income += attrUpdates.income
-    }
-
-    if (attrUpdates.wellbeing) {
-      family.wellbeing += attrUpdates.wellbeing
-    }
-
-    if (family.averageStats() >= this.statusTierThreshold(family.familyStatus.text)) {
+  handleContinue() {
+    if (this.state.family.averageStats() >= this.statusTierThreshold(this.state.family.familyStatus.text)) {
       // NeedEvent
+      console.log("Need Event")
     } else {
+      this.props.updateFamily(this.state.family);
       this.setState({
-        family: family,
-        selectedEvent: drawEventCard(family)
+        selectedEvent: drawEventCard(this.state.family),
+        selectedResponse: null
       })
     }
   }
@@ -100,7 +110,7 @@ export default class EventCard extends React.Component {
                     size='lg'
                     color='primary'
                     outline
-                    onClick={()=>{this.handleContinue(s.statusChanges)}}
+                    onClick={this.handleContinue()}
                   >
                     Continue
                   </Button>

@@ -8,7 +8,6 @@ import {shuffle} from '../../helpers.js'
 
 export default function drawEventCard(family) {
   const neutralEvents = neutralDeck;
-  debugger;
   let statusEvents = determineStatus(family.familyStatus.text);
   let potentialEvents = [];
 

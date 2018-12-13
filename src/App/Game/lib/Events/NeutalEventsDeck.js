@@ -56,7 +56,7 @@ export default {
       title: "Good Grades!",
       text: (props => `${props.family.children[0].firstName} bursts through the door waving ${props.family.children[0].gender === "male" ? "his" : "her"} report card excitedly; ${props.family.children[0].gender === "male" ? "He" : "She"} got straight A's!`),
       solutions: [
-        (props => new Solution(1, `Great work, ${props.family.children[0].firstName}!`, 'The Proud Parent', `${props.family.primary.firstName} lets ${props.family.children[0].firstName} know ${props.family.primary.gender === "male" ? "he's" : "she's"} proud of ${props.family.children[0].gender === "male" ? "him" : "her"}.`)),
+        (props => new Solution(1, `Great work, ${props.family.children[0].firstName}!`, 'The Proud Parent', `${props.family.primary.firstName} lets ${props.family.children[0].firstName} know ${props.family.primary.gender === "male" ? "he's" : "she's"} proud of ${props.family.children[0].gender === "male" ? "him" : "her"}.`, "event", {wellbeing: 5})),
       ]
     }
   ],
