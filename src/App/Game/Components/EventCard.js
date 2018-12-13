@@ -73,7 +73,7 @@ export default class EventCard extends React.Component {
             return (
               <SolutionSelect
                 solution={s}
-                disabled={this.state.selectedResponse === false}
+                disabled={this.state.selectedResponse !== null}
                 onClick={this.evaluateSelected}
                 key={s.key}
                 id={s.key}
