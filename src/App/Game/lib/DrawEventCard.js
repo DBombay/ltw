@@ -33,7 +33,8 @@ export default function drawEventCard(family) {
     potentialEvents.push(statusEvents.primaryEvents.disabled)
   }
 
-  if (family.primary.hasChild) {
+  //Primary hasChild events should be written as single-parent household events
+  if (family.primary.hasChild && !family.secondary) {
     potentialEvents.push(neutralEvents.primaryEvents.hasChild);
     potentialEvents.push(statusEvents.primaryEvents.hasChild)
   }
@@ -60,16 +61,13 @@ export default function drawEventCard(family) {
       potentialEvents.push(statusEvents.secondaryEvents.disabled)
     }
 
+    //Secondary hasChild events should be written in the context of parenting from BOTH the primary and secondary
     if (family.secondary.hasChild) {
       potentialEvents.push(neutralEvents.secondaryEvents.hasChild);
       potentialEvents.push(statusEvents.secondaryEvents.hasChild)
     }
   }
-  //Check for children, then add related events
-  if (family.children && family.children.length > 0) {
-    potentialEvents.push(neutralEvents.childrenEvents);
-    potentialEvents.push(statusEvents.childrenEvents)
-  }
+
   //Check for seniors, then add related events
   if (family.seniors && family.seniors.length > 0) {
     potentialEvents.push(neutralEvents.seniorEvents);
@@ -82,13 +80,11 @@ export default function drawEventCard(family) {
   potentialEvents.push(neutralEvents.homeEvents);
   potentialEvents.push(statusEvents.homeEvents);
 
-  //Shuffle potential events and return the first 8
+  //Shuffle potential events and flatten the deck
   let shuffledEvents = shuffle(potentialEvents.flat())
 
-  //Add status tier-based events, reshuffle the deck, return the final array
-
-  //return the final deck
-  return shuffledEvents.flat().pop()
+  //return a randomly drawn card from the deck
+  return shuffledEvents[Math.floor(Math.random() * shuffledEvents.length)]
 }
 
 function determineStatus(text) {

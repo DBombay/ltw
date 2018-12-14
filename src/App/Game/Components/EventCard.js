@@ -24,7 +24,8 @@ export default class EventCard extends React.Component {
   }
 
   evaluateSelected(solution) {
-    let family = this.state.family
+    let family = this.state.family;
+
     if (solution.statusChanges.food) {
       family.food += solution.statusChanges.food
     }
@@ -56,9 +57,11 @@ export default class EventCard extends React.Component {
       // NeedEvent
       console.log("Need Event")
     } else {
+      let newEvent = drawEventCard(family);
+
       this.props.updateFamily(family);
       this.setState({
-        selectedEvent: drawEventCard(family),
+        selectedEvent: newEvent,
         selectedResponse: null
       })
     }
