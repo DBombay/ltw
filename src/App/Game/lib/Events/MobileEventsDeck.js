@@ -27,7 +27,6 @@ export const mobileEvents =
       disabled: [],
       hasChild: []
     },
-    childrenEvents: [],
     seniorEvents: [],
     familyEvents: [],
     homeEvents: []

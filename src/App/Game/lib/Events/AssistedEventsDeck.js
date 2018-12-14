@@ -27,7 +27,6 @@ export const assistedEvents =
       disabled: [],
       hasChild: []
     },
-    childrenEvents: [],
     seniorEvents: [],
     familyEvents: [],
     homeEvents: []

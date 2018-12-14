@@ -102,7 +102,6 @@ export const awareEvents =
       disabled: [],
       hasChild: []
     },
-    childrenEvents: [],
     seniorEvents: [],
     familyEvents: [],
     homeEvents: []
