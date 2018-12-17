@@ -39,7 +39,17 @@ export default {
     ],
     unemployed: [],
     insured: [],
-    uninsured: [],
+    uninsured: [
+      {
+        title: "Ouch! That was a bad fall.",
+        text: (props => `${props.family.primary.firstName} slipped and fell hard on ${props.family.primary.gender === "male" ? "his" : "her"} left side. ${props.family.primary.gender === "male" ? "He" : "She"} thought ${props.family.primary.gender === "male" ? "his" : "her"} left ankle was just bruised, but now it feels more like a really bad sprain. It's difficult to get around.`),
+        solutions: [
+          (props => new Solution(1, `Stay home and continue to ice it.`, "The swelling is going down. I think...", `${props.family.primary.firstName}'s ankle looks a little better but ${props.family.primary.gender === "male"? "he" : "she"} still can barely move it. ${props.family.primary.gender === "male"? "He" : "She"} isn't sure how long it will take to heal.`, {health: -5})),
+          (props => new Solution(2, `Go to urgent care.`, "My ankle is smaller, and so is my savings...", `${props.family.primary.firstName} wasn't ready for that medical bill, but  at least ${props.family.primary.gender === "male" ? "his" : "her"}  ankle feels a lot better. The doctor said ${props.family.primary.gender === "male" ? "he" : "she"} should be back to normal in a few more days.`, {health: 5, income: -5, wellbeing: 5})),
+          (props => new Solution(3, `Take some OTC pain killers and continue business as usual.`, "I'm tough enough to fight through this...", `${props.family.primary.firstName} is trying to keep the weight off ${props.family.primary.gender === "male" ? "his" : "her"} left foot, but people have been noticing the limping. The pain feels like it's getting worse.`, {health: -5, wellbeing: -5}))
+        ]
+      }
+    ],
     disabled: [],
     hasChild: [
       {

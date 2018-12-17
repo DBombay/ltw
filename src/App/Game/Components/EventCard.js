@@ -145,7 +145,7 @@ export default class EventCard extends React.Component {
         <CardTitle className="row justify-content-center text-capitalize display-4">
           {this.state.selectedEvent.title}
         </CardTitle>
-        <CardBody className='text-center'>
+        <CardBody className='text-center offset-md-2 col-md-8 col-sm-12 align-self-center'>
           {this.state.selectedEvent.text(this.state)}
         </CardBody>
           {this.retrieveEventSolutions()}
