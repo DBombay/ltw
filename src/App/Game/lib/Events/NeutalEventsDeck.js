@@ -112,9 +112,6 @@ export default {
       }
     ]
   },
-  childrenEvents: [
-
-  ],
   seniorEvents: [],
   familyEvents: [],
   homeEvents: []

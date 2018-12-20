@@ -14,11 +14,9 @@ export default function StartContainer() {
           <FontAwesomeIcon icon="hands-helping" size='9x'/>
         </CardBody>
 
-        <CardFooter className='row justify-content-center'>
-          <div>
+        <CardFooter>
+          <div className='row justify-content-center'>
             <Button size='lg' color='warning' href={`/game`} className='mx-1 col-auto'>New Game</Button>
-          </div>
-          <div>
             <Button size='lg' color='danger' href={`/glossary`} className='mx-1 col-auto'>Glossary</Button>
           </div>
         </CardFooter>

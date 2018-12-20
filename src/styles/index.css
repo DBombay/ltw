@@ -6829,7 +6829,8 @@ a.text-info-light:hover, a.text-info-light:focus {
 
 html, body {
   height: 100%;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  font-family: 'Work Sans', sans-serif; }
 
 .game-space {
   max-height: 70vh;
