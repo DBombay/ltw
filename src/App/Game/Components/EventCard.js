@@ -108,7 +108,7 @@ export default class EventCard extends React.Component {
                   <CardText className='text-center text-dark'>{s.impactExplanation}</CardText>
                 </div>
 
-                <ul className="my-2 text-center h6">
+                <ul className="my-2 text-center h5" style={{"list-style": "none"}}>
                   {s.statusChanges.food && <li className={s.statusChanges.food > 0 ? 'text-success' : `text-danger`}>Food: {s.statusChanges.food > 0 ? `+${s.statusChanges.food}` : `-${s.statusChanges.food}`}</li>}
                   {s.statusChanges.housing && <li className={s.statusChanges.housing > 0 ? 'text-success' : `text-danger`}>Housing: {s.statusChanges.housing > 0 ? `+${s.statusChanges.housing}` : `-${s.statusChanges.housing}`}</li>}
                   {s.statusChanges.health && <li className={s.statusChanges.health > 0 ? 'text-success' : `text-danger`}>Health: {s.statusChanges.health > 0 ? `+${s.statusChanges.health}` : `-${s.statusChanges.health}`}</li>}
