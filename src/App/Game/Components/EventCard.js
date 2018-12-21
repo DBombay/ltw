@@ -2,7 +2,6 @@ import React from 'react'
 import {CardBody, ListGroup, CardText, Button, CardTitle} from 'reactstrap'
 import drawEventCard from '../lib/DrawEventCard'
 import SolutionSelect from "./SolutionSelect";
-import {times} from "../../helpers"
 
 
 export default class EventCard extends React.Component {
@@ -105,15 +104,15 @@ export default class EventCard extends React.Component {
                 </div>
 
                 <div className='row justify-content-center my-2'>
-                  <CardText className='text-center text-dark'>{s.impactExplanation}</CardText>
+                  <CardText className='text-center text-dark col-10'>{s.impactExplanation}</CardText>
                 </div>
 
                 <ul className="my-2 text-center h5" style={{"list-style": "none"}}>
-                  {s.statusChanges.food && <li className={s.statusChanges.food > 0 ? 'text-success' : `text-danger`}>Food: {s.statusChanges.food > 0 ? `+${s.statusChanges.food}` : `-${s.statusChanges.food}`}</li>}
-                  {s.statusChanges.housing && <li className={s.statusChanges.housing > 0 ? 'text-success' : `text-danger`}>Housing: {s.statusChanges.housing > 0 ? `+${s.statusChanges.housing}` : `-${s.statusChanges.housing}`}</li>}
-                  {s.statusChanges.health && <li className={s.statusChanges.health > 0 ? 'text-success' : `text-danger`}>Health: {s.statusChanges.health > 0 ? `+${s.statusChanges.health}` : `-${s.statusChanges.health}`}</li>}
-                  {s.statusChanges.income && <li className={s.statusChanges.income > 0 ? 'text-success' : `text-danger`}>Income: {s.statusChanges.income > 0 ? `+${s.statusChanges.income}` : `-${s.statusChanges.income}`}</li>}
-                  {s.statusChanges.wellbeing && <li className={s.statusChanges.wellbeing > 0 ? 'text-success' : `text-danger`}>Well-Being:{s.statusChanges.wellbeing > 0 ? `+${s.statusChanges.wellbeing}` : `-${s.statusChanges.wellbeing}`}</li>}
+                  {s.statusChanges.food && <li className={s.statusChanges.food > 0 ? 'text-success' : `text-danger`}>Food: {s.statusChanges.food > 0 ? `+${s.statusChanges.food}` : `${s.statusChanges.food}`}</li>}
+                  {s.statusChanges.housing && <li className={s.statusChanges.housing > 0 ? 'text-success' : `text-danger`}>Housing: {s.statusChanges.housing > 0 ? `+${s.statusChanges.housing}` : `${s.statusChanges.housing}`}</li>}
+                  {s.statusChanges.health && <li className={s.statusChanges.health > 0 ? 'text-success' : `text-danger`}>Health: {s.statusChanges.health > 0 ? `+${s.statusChanges.health}` : `${s.statusChanges.health}`}</li>}
+                  {s.statusChanges.income && <li className={s.statusChanges.income > 0 ? 'text-success' : `text-danger`}>Income: {s.statusChanges.income > 0 ? `+${s.statusChanges.income}` : `${s.statusChanges.income}`}</li>}
+                  {s.statusChanges.wellbeing && <li className={s.statusChanges.wellbeing > 0 ? 'text-success' : `text-danger`}>Well-Being: {s.statusChanges.wellbeing > 0 ? `+${s.statusChanges.wellbeing}` : `${s.statusChanges.wellbeing}`}</li>}
                 </ul>
 
                 <div className="row justify-content-center my-3">
