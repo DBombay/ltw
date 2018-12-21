@@ -61,13 +61,13 @@ export default class BarrierEventCard extends React.Component {
             return (
               <div key={solution.key} id={solution.key}>
                 <div className='row justify-content-center'>
-                  <span className='text-center h2'>
+                  <span className='text-center h2 text-dark'>
                     {solution.impactHeader}
                   </span>
                 </div>
 
                 <div className='row justify-content-center my-2'>
-                  <CardText className='text-center'>{solution.impactExplanation}</CardText>
+                  <CardText className='text-center text-dark'>{solution.impactExplanation}</CardText>
                 </div>
 
                 {(solution.impactHeader === "Great Choice!") &&
@@ -75,7 +75,6 @@ export default class BarrierEventCard extends React.Component {
                   <Button
                     size='lg'
                     color='primary'
-                    outline
                     onClick={this.handleOvercomeBarrier}>
                     Great Work!
                   </Button>
@@ -92,8 +91,8 @@ export default class BarrierEventCard extends React.Component {
     return (
       <div className='justify-content-center flex-column game-space verticalExpansion'>
         <CardTitle
-          className="row justify-content-center text-capitalize display-4">{this.state.barrier.key} Barrier</CardTitle>
-        <CardBody className='text-center'>
+          className="row justify-content-center text-capitalize display-4 text-dark">{this.state.barrier.key} Barrier</CardTitle>
+        <CardBody className='text-center text-dark'>
           {this.state.eventInfo.text}
         </CardBody>
         {this.retrieveEventSolutions()}

@@ -69,7 +69,7 @@ export default class PlayContainer extends React.Component {
       <div className='container align-self-center'>
         <Card className='my-2 align-self-center mh-100 h-100 shadow-lg'>
           <CardHeader>
-            <CardTitle className='text-center h2 text-capitalize'>{this.state.cardHeader}</CardTitle>
+            <CardTitle className='text-center h2 text-capitalize text-dark'>{this.state.cardHeader}</CardTitle>
           </CardHeader>
           <CardBody>
             {(this.state.stage === "tutorial") && <Tutorial handleFamilyGeneration={this.handleFamilyGeneration}/>}

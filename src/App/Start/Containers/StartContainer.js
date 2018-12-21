@@ -16,8 +16,8 @@ export default function StartContainer() {
 
         <CardFooter>
           <div className='row justify-content-center'>
-            <Button size='lg' color='warning' href={`/game`} className='mx-1 col-auto'>New Game</Button>
-            <Button size='lg' color='danger' href={`/glossary`} className='mx-1 col-auto'>Glossary</Button>
+            <Button size='lg' color='primary' href={`/game`} className='mx-1 col-auto'>New Game</Button>
+            <Button size='lg' color='primary' href={`/glossary`} className='mx-1 col-auto' disabled={true}>Glossary</Button>
           </div>
         </CardFooter>
       </Card>

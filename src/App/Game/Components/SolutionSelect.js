@@ -6,7 +6,7 @@ export default function SolutionSelect(props) {
     <ListGroupItem
       action
       disabled={props.disabled}
-      className={`offset-3 col-6 text-center my-1 ${props.disabled === props.id && 'border-primary'}`}
+      className={`offset-3 col-6 text-center my-1 text-dark ${props.selected && 'border-primary'}`}
       id={props.id}
       onClick={() => {
         props.onClick(props.solution)

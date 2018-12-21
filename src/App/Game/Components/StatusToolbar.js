@@ -40,18 +40,20 @@ export default class StatusToolbar extends React.Component {
     }
   }
 
-  determineColor(value) {
+  determineColor(text) {
     switch (true) {
-      case value < 25:
+      case text === 'unaware':
         return 'danger';
-      case value >= 25 && value < 80:
+      case text === "aware":
+        return 'secondary';
+      case text === "assisted":
         return 'warning';
-      case value >= 80 && value < 100:
+      case text === "mobile":
         return 'success';
-      case value >= 100:
-        return 'info';
+      case text === "independent":
+        return "info";
       default:
-        return 'info'
+        return 'danger';
     }
   }
 
@@ -63,7 +65,7 @@ export default class StatusToolbar extends React.Component {
             <span className="h4 text-center">
               <strong className='text-dark'>Family Status:</strong>
               <span
-                className={`badge badge-${this.determineColor(this.state.statValue)} text-white mx-2 text-uppercase`}>
+                className={`badge badge-${this.determineColor(this.state.text)} text-white mx-2 text-uppercase`}>
                 {this.state.statText }
               </span>
             </span>

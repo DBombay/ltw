@@ -2,6 +2,7 @@ import React from 'react'
 import {CardBody, ListGroup, CardText, Button, CardTitle} from 'reactstrap'
 import drawEventCard from '../lib/DrawEventCard'
 import SolutionSelect from "./SolutionSelect";
+import {times} from "../../helpers"
 
 
 export default class EventCard extends React.Component {
@@ -77,6 +78,7 @@ export default class EventCard extends React.Component {
               <SolutionSelect
                 solution={s}
                 disabled={this.state.selectedResponse !== null}
+                selected={this.state.selectedResponse === s.key}
                 onClick={this.evaluateSelected}
                 key={s.key}
                 id={s.key}
@@ -97,20 +99,19 @@ export default class EventCard extends React.Component {
             return (
               <div key={s.key} id={s.key}>
                 <div className='row justify-content-center'>
-                  <span className='text-center h2'>
+                  <span className='text-center h2 text-dark'>
                     {s.impactHeader}
                   </span>
                 </div>
 
                 <div className='row justify-content-center my-2'>
-                  <CardText className='text-center'>{s.impactExplanation}</CardText>
+                  <CardText className='text-center text-dark'>{s.impactExplanation}</CardText>
                 </div>
 
                 <div className="row justify-content-center my-3">
                   <Button
                     size='lg'
                     color='primary'
-                    outline
                     onClick={() => {this.handleContinue(this.state.family)}}
                   >
                     Continue
@@ -142,10 +143,10 @@ export default class EventCard extends React.Component {
       <div className='justify-content-center flex-column game-space verticalExpansion'>
         {this.state.selectedEvent &&
         <span>
-        <CardTitle className="row justify-content-center text-capitalize display-4">
+        <CardTitle className="row justify-content-center text-capitalize display-4 text-dark">
           {this.state.selectedEvent.title}
         </CardTitle>
-        <CardBody className='text-center offset-md-2 col-md-8 col-sm-12 align-self-center'>
+        <CardBody className='text-center offset-md-2 col-md-8 col-sm-12 align-self-center text-dark'>
           {this.state.selectedEvent.text(this.state)}
         </CardBody>
           {this.retrieveEventSolutions()}

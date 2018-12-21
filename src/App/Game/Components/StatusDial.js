@@ -20,13 +20,13 @@ export default class StatusDial extends React.Component {
   // requires
   determineStatusFor(attribute) {
     switch (true) {
-      case attribute <= 25:
+      case attribute < 25:
         return "default";
-      case attribute > 25 && attribute <= 75:
+      case attribute >= 25 && attribute < 50:
         return "error";
-      case attribute > 75 && attribute < 100:
+      case attribute >= 50 && attribute < 75:
         return "active";
-      case attribute >= 100:
+      case attribute >= 75:
         return "success"
     }
   }
@@ -42,23 +42,23 @@ export default class StatusDial extends React.Component {
           {
             default: {
               symbol: this.for,
-              trailColor: 'pink',
-              color: 'red'
+              trailColor: '#FDB7AA',
+              color: '#D66C6C'
             },
             error: {
               symbol: this.for,
-              trailColor: 'yellow',
-              color: 'orange'
+              trailColor: '#F99C45',
+              color: '#F9CC98'
             },
             active: {
               symbol: this.for,
-              trailColor: 'lime',
-              color: 'green'
+              trailColor: '#FFEC7C',
+              color: '#FFCF2D'
             },
             success: {
               symbol: this.for,
-              trailColor: 'cyan',
-              color: 'cyan'
+              trailColor: '#B6E896',
+              color: '#8CC26A'
             }
           }
         }
