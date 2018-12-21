@@ -9,7 +9,6 @@ export default class StatusToolbar extends React.Component {
   constructor(props) {
     super(props);
     this.family = this.props.family;
-    this.determineFamilyStatusText = this.determineFamilyStatusText.bind(this);
     this.determineColor = this.determineColor.bind(this);
 
     // I'm setting state here because we use this toolbar to
@@ -21,7 +20,7 @@ export default class StatusToolbar extends React.Component {
       housing: 30,
       health: 50,
       income: 80,
-      wellbeing: 100
+      wellbeing: 125
     }
   }
 
@@ -31,55 +30,32 @@ export default class StatusToolbar extends React.Component {
     if (this.family) {
       this.setState({
         statText: props.family.familyStatus.text,
-        statValue: props.family.familyStatus.averageStatValue,
-        food: props.family.foodStat,
-        housing: props.family.housingStat,
-        health: props.family.healthStat,
-        income: props.family.incomeStat,
-        wellbeing: props.family.wellbeingStat
+        statValue: props.family.averageStats(),
+        food: props.family.food,
+        housing: props.family.housing,
+        health: props.family.health,
+        income: props.family.income,
+        wellbeing: props.family.wellbeing
       })
     }
   }
 
-  determineColor(value) {
+  determineColor(text) {
     switch (true) {
-      case value < 25:
+      case text === 'unaware':
         return 'danger';
-      case value >= 25 && value < 80:
+      case text === "aware":
+        return 'secondary';
+      case text === "assisted":
         return 'warning';
-      case value >= 80 && value < 100:
+      case text === "mobile":
         return 'success';
-      case value >= 100:
-        return 'info';
+      case text === "independent":
+        return "info";
       default:
-        return 'info'
+        return 'danger';
     }
   }
-
-  determineFamilyStatusText(family) {
-    if (!family) {
-      return 'unaware'
-    }
-
-    const average = family.familyStatus.averageStatValue;
-    let textValue;
-    if (family.familyStatus.text.toLowerCase() === 'unaware') {
-      return textValue = "unaware"
-    } else {
-      switch (true) {
-        case average < 25:
-          return textValue = 'aware';
-        case average >= 25 && average < 50:
-          return textValue = 'assisted';
-        case average >= 50 && average < 90:
-          return textValue = 'mobile';
-        case average >= 90:
-          return textValue = 'independent';
-      }
-    }
-    family.familyStatus.text = textValue
-  }
-
 
   render() {
     return (
@@ -89,8 +65,8 @@ export default class StatusToolbar extends React.Component {
             <span className="h4 text-center">
               <strong className='text-dark'>Family Status:</strong>
               <span
-                className={`badge badge-${this.determineColor(this.state.statValue)} text-white mx-2 text-uppercase`}>
-                {this.determineFamilyStatusText(this.props.family)}
+                className={`badge badge-${this.determineColor(this.state.text)} text-white mx-2 text-uppercase`}>
+                {this.state.statText }
               </span>
             </span>
           </div>

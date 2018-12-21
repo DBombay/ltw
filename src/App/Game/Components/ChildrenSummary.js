@@ -10,17 +10,14 @@ import {CardText} from "reactstrap";
 export default class ChildrenSummary extends React.Component {
   constructor(props) {
     super(props);
+    this.family = props.family;
     this.determineGuardians = this.determineGuardians.bind(this);
     this.listChildren = this.listChildren.bind(this);
     this.declareInfant = this.declareInfant.bind(this);
-    this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this)
-    this.state = {
-      family: null
-    }
   }
 
   componentWillReceiveProps(props) {
-    this.setState({family: props.family});
+    this.family = props.family
   }
 
   determineGuardians(family) {
@@ -68,7 +65,7 @@ export default class ChildrenSummary extends React.Component {
   }
 
   render() {
-    let family = this.state.family;
+    let family = this.family;
     let children = family ? family.children : null;
     let lastChild = children ? children[children.length - 1] : null;
 

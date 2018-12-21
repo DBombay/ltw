@@ -28,19 +28,19 @@ export function generateFamily() {
 
 //We add stats based on Primary's attributes
   if (family.primary.employed) {
-    family.foodStat += 10;
-    family.housingStat += 10;
-    family.incomeStat += 10;
-    family.wellbeingStat += 10;
+    family.food += 10;
+    family.housing += 10;
+    family.income += 10;
+    family.wellbeing += 10;
   }
 
   if (family.primary.insured) {
-    family.healthStat += 5;
-    family.wellbeingStat += 5;
+    family.health += 5;
+    family.wellbeing += 5;
   }
 
   if (family.primary.disabled) {
-    family.healthStat <= 5 ? family.healthStat = 0 : family.healthStat -= 5
+    family.health <= 5 ? family.health = 0 : family.health -= 5
   }
 
   // Now we determine if the primary gets a partner.
@@ -50,19 +50,19 @@ export function generateFamily() {
   // impact, since the assumption is that the primary is also generating the most income.
   if (family.secondary) {
     if (family.secondary.employed) {
-      family.foodStat += 5;
-      family.housingStat += 5;
-      family.incomeStat += 5;
-      family.wellbeingStat += 5;
+      family.food += 5;
+      family.housing += 5;
+      family.income += 5;
+      family.wellbeing += 5;
     }
 
     if (family.secondary.insured) {
-      family.healthStat += 5;
-      family.wellbeingStat += 5;
+      family.health += 5;
+      family.wellbeing += 5;
     }
 
     if (family.secondary.disabled) {
-      family.healthStat <= 5 ? family.healthStat = 0 : family.healthStat -= 5
+      family.health <= 5 ? family.health = 0 : family.health -= 5
     }
   }
 
@@ -83,21 +83,21 @@ export function generateFamily() {
   // that the total stat doesn't dip below zero, since that'd give families with a lot of kids and no income a MAJOR
   // disadvantage (JUST LIKE REAL LIFE), and that's less fun from a gaming perspective.
   if (family.children) {
-    family.housingStat <= 5 * family.children.length ? family.housingStat = 0 : family.housingStat -= 5 * family.children.length;
-    family.incomeStat <= 5 * family.children.length ? family.incomeStat = 0 : family.incomeStat -= 5 * family.children.length;
-    family.foodStat <= 5 * family.children.length ? family.foodStat = 0 : family.foodStat -= 5 * family.children.length;
-    family.wellbeingStat <= 5 * family.children.length ? family.wellbeingStat = 0 : family.wellbeingStat -= 5 * family.children.length;
+    family.housing <= 5 * family.children.length ? family.housing = 0 : family.housing -= 5 * family.children.length;
+    family.income <= 5 * family.children.length ? family.income = 0 : family.income -= 5 * family.children.length;
+    family.food <= 5 * family.children.length ? family.food = 0 : family.food -= 5 * family.children.length;
+    family.wellbeing <= 5 * family.children.length ? family.wellbeing = 0 : family.wellbeing -= 5 * family.children.length;
 
     family.children.forEach(function (child) {
       if (child.insured) {
-        family.healthStat += 5;
-        family.wellbeingStat += 5;
+        family.health += 5;
+        family.wellbeing += 5;
       }
 
       // Infants incur an income penalty. These are in addition to the Child penalties. Much like the Highlander though,
       // 'THERE CAN BE ONLY ONE.'
       if (child.infant) {
-        family.incomeStat <= 5 ? family.incomeStat = 0 : family.incomeStat -= 5
+        family.income <= 5 ? family.income = 0 : family.income -= 5
       }
     })
   }
@@ -114,19 +114,19 @@ export function generateFamily() {
   // hit). Since they're sharing living space and share household meals, both those values take a hit.
 
   if (family.seniors) {
-    family.housingStat <= 5 * family.children.length ? family.housingStat = 0 : family.housingStat -= 5 * family.children.length;
-    family.foodStat <= 5 * family.children.length ? family.foodStat = 0 : family.foodStat -= 5 * family.children.length;
+    family.housing <= 5 * family.children.length ? family.housing = 0 : family.housing -= 5 * family.children.length;
+    family.food <= 5 * family.children.length ? family.food = 0 : family.food -= 5 * family.children.length;
 
     family.seniors.forEach(function (senior) {
       if (senior.insured) {
-        family.healthStat += 5;
-        family.wellbeingStat += 5;
+        family.health += 5;
+        family.wellbeing += 5;
       }
     });
 
     // If the family has children in the household, the assumption here is that seniors will help take care of them
     if (family.children) {
-      family.wellbeingStat += 5 * family.seniors.length
+      family.wellbeing += 5 * family.seniors.length
     }
   }
 

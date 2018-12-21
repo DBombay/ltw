@@ -1,24 +1,35 @@
 import React from 'react'
 import {CardHeader, Card, CardTitle, CardBody} from 'reactstrap'
-import {generateFamily, FamilySummary, StatusToolbar, Tutorial, BarrierEventCard} from "../../Game";
+import {generateFamily, FamilySummary, StatusToolbar, Tutorial, BarrierEventCard, EventCard} from "../../Game";
 
 export default class PlayContainer extends React.Component {
   constructor(props) {
     super(props);
+    this.updateFamily = this.updateFamily.bind(this)
     this.handleFamilyGeneration = this.handleFamilyGeneration.bind(this);
-    this.resetFamily = this.resetFamily.bind(this);
     this.handleLeadTheWay = this.handleLeadTheWay.bind(this);
     this.handleOvercomeBarrier = this.handleOvercomeBarrier.bind(this);
+    this.resetFamily = this.resetFamily.bind(this);
+    this.updateToolbar = this.updateToolbar.bind(this);
     this.state = {
       cardHeader: "How To Play",
       family: null,
+      toolbarStatus: null,
       stage: "tutorial",
       playedEvents: []
     }
   }
 
-  averageStats(family) {
-    return (family.foodStat + family.housingStat + family.healthStat + family.incomeStat + family.wellbeingStat) / 5
+  updateFamily(family) {
+    this.setState({
+      family: family
+    })
+  }
+
+  updateToolbar(family) {
+    this.setState({
+      toolbarStatus: family
+    })
   }
 
   handleFamilyGeneration() {
@@ -28,6 +39,7 @@ export default class PlayContainer extends React.Component {
       stage: "familyGenerator",
       cardHeader: `The ${generated.primary.lastName} Family`
     });
+    this.updateToolbar(generated)
   }
 
   handleLeadTheWay() {
@@ -38,9 +50,9 @@ export default class PlayContainer extends React.Component {
   }
 
   handleOvercomeBarrier() {
-    this.state.family.familyStatus = {text: 'aware', averageStatValue: this.averageStats(this.state.family)};
+    this.state.family.familyStatus = {text: 'aware'};
     this.setState({
-      stage: "eventDeck",
+      stage: "events",
       cardHeader: `The ${this.state.family.primary.lastName} Family`
     })
   }
@@ -57,7 +69,7 @@ export default class PlayContainer extends React.Component {
       <div className='container align-self-center'>
         <Card className='my-2 align-self-center mh-100 h-100 shadow-lg'>
           <CardHeader>
-            <CardTitle className='text-center h2 text-capitalize'>{this.state.cardHeader}</CardTitle>
+            <CardTitle className='text-center h2 text-capitalize text-dark'>{this.state.cardHeader}</CardTitle>
           </CardHeader>
           <CardBody>
             {(this.state.stage === "tutorial") && <Tutorial handleFamilyGeneration={this.handleFamilyGeneration}/>}
@@ -76,9 +88,11 @@ export default class PlayContainer extends React.Component {
               handleOvercomeBarrier={this.handleOvercomeBarrier}
             />}
 
-            {(this.state.stage === "eventDeck") && <div>Reg Events</div>}
+            {(this.state.stage === "events") &&
+            <EventCard family={this.state.family} updateFamily={this.updateFamily} updateToolbar={this.updateToolbar}/>}
+
           </CardBody>
-          <StatusToolbar family={this.state.family}/>
+          <StatusToolbar family={this.state.toolbarStatus}/>
         </Card>
       </div>
     )

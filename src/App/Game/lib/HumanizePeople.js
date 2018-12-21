@@ -4,7 +4,7 @@ import Barrier from './Barrier'
 
 export default {
   barriers: [
-    // IMPORTANT: Make sure you also update the barrierEvents in the EventDeck.js if you make a new key!
+    // IMPORTANT: Make sure you also update AwareEventsDeck.js if you make a new key!
     // Complete the sentence: `The ${family.primary.lastName}'s biggest barrier is...`
     new Barrier('non-native speaker', "language: 'We stay in the area. It's easier. Neighbors speak the same language as we do."),
     new Barrier('no personal vehicle', "convenient transportation: 'Public transit is okay, but sometimes it takes two or more transfers.'"),
@@ -18,6 +18,27 @@ export default {
     new Barrier('no time', "their lack of time: 'Go where? Do what? Who has time to do that?'"),
     new Barrier('previous experience', "their previous experience applying for assistance: 'Ugh. It was just one big mess. Impossible to make sense of it all.'")
   ],
+  basicNeeds: {
+    "food":[],
+    "housing": [],
+    "health": [],
+    "income": [],
+    "wellbeing": []
+  },
+  elevationNeeds: {
+    "food": [],
+    "housing": [],
+    "health": [],
+    "income": [],
+    "wellbeing": []
+  },
+  independenceNeeds: {
+    "food": [],
+    "housing": [],
+    "health": [],
+    "income": [],
+    "wellbeing": []
+  },
   jobs: [
     //Complete the sentence: "They currently work as ..."
     "a mechanic",
