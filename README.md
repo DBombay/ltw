@@ -37,7 +37,4 @@ The app uses React.js and Bootstrap. File structure typically separates files by
 #### Deploy to Production
 *Coming eventually*
 
-### Running the Test Suite
-lol tdd
-
 ## Troubleshooting
