@@ -24,7 +24,7 @@ The app uses React.js and Bootstrap. File structure typically separates files by
 ### Installation
 
 1. Clone Repository
-`https://github.com/BenefitsDataTrust/LTW.git`
+`https://github.com/DBombay/ltw.git`
 
 2. Install required dependencies
 `npm install` & `yarn install`
